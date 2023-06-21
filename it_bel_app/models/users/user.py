@@ -1,16 +1,18 @@
 from django.db import models
 from django.utils import timezone
 
+from it_bel_app.managers.user import UserManager
 
-class Author(models.Model):
-    """Модель автора"""
 
-    author_id = models.AutoField(
+class User(models.Model):
+    """Модель пользователя"""
+
+    user_id = models.AutoField(
         primary_key=True,
-        verbose_name="ID автора"
+        verbose_name="ID пользователя"
     )
-    name = models.CharField(
-        verbose_name="Имя автора",
+    username = models.CharField(
+        verbose_name="Имя пользователя",
         max_length=150,
         unique=True,
         null=True,
@@ -26,11 +28,20 @@ class Author(models.Model):
         verbose_name="Дата регистрации",
         default=timezone.now
     )
+    is_staff = models.BooleanField(
+        verbose_name="Админ",
+        default=False
+    )
     is_active = models.BooleanField(
         verbose_name="Активный",
         default=True
     )
 
+    objects = UserManager()
+
+    def __str__(self):
+        return f"{self.username} ({self.email})"
+
     class Meta:
-        verbose_name = "Автор"
-        verbose_plural = "Авторы"
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
