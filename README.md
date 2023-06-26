@@ -1,4 +1,4 @@
-Start:
+Raise the project:
 
 step 1: python -m venv venv
 
@@ -13,5 +13,3 @@ step 5: python manage.py makemigrations
 step 6: python manage.py migrate
 
 -----------------------------------------
-
-Key technologies: Python 3.11, Django, Django REST, HTML, CSS, PostgreSQL .
