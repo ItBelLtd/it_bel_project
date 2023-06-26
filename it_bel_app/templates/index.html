@@ -1,30 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
- <title>Моя главная страница</title>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
-</head>
-<body>
- <header>
-  <nav>
-   <ul>
-    <li><a href="#">Главная</a></li>
-    <li><a href="#">О нас</a></li>
-    <li><a href="#">Контакты</a></li>
-   </ul>
-  </nav>
- </header>
+{% extends "base.html" %}
 
- <div class="container">
-  <h1>Все новости из мира IT и не только</h1>
-  <p>Здесь вы можете найти информацию о нашей команде и проектах, над которыми мы работаем. </p>
- </div>
+{% block content %}
 
- <footer>
-  <p>&copy; 2023 Моя компания. Все права защищены.</p>
- </footer>
-</body>
-</html>
+    <div class="container">
+        <h1>Все новости из мира IT и не только</h1>
+        <p>Здесь вы можете найти информацию о нашей команде и проектах, над которыми мы работаем. </p>
+    </div>
+
+{% endblock %}

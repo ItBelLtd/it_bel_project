@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+ <title>{{title}}</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+<body>
+
+{% block header %}
+ <header>
+  <nav>
+   <ul>
+    <li><a href="/">Главная</a></li>
+    <li><a href="#">О нас</a></li>
+    <li><a href="">Контакты</a></li>
+   </ul>
+  </nav>
+ </header>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+ <footer>
+  <p>&copy; 2023 Моя компания. Все права защищены.</p>
+ </footer>
+</body>
+</html>
+{% endblock %}
