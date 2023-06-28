@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class News(models.Model):
-    """Модель новости"""
+
 
     news_id = models.AutoField(
         primary_key=True,

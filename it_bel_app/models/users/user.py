@@ -5,7 +5,7 @@ from it_bel_app.managers.user import UserManager
 
 
 class User(models.Model):
-    """Модель пользователя"""
+
 
     user_id = models.AutoField(
         primary_key=True,
