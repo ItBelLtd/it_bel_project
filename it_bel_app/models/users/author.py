@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 class Author(models.Model):
-
+    """Модель автора"""
 
     author_id = models.AutoField(
         primary_key=True,
