@@ -9,12 +9,30 @@ class Author(models.Model):
         primary_key=True,
         verbose_name="ID автора"
     )
+    author_name = models.CharField(
+        verbose_name="Ник автора",
+        max_length=150,
+        unique=True,
+        null=False,
+        blank=True
+    )
     name = models.CharField(
         verbose_name="Имя автора",
         max_length=150,
-        unique=True,
-        null=True,
-        blank=True
+        null=False,
+        blank=False
+    )
+    surname = models.CharField(
+        verbose_name="Фамилия автора",
+        max_length=150,
+        null=False,
+        blank=False
+    )
+    age = models.IntegerField(
+        verbose_name="Возраст автора",
+        null=False,
+        blank=False,
+        help_text="Возраст"
     )
     email = models.EmailField(
         blank=False,
@@ -28,7 +46,7 @@ class Author(models.Model):
     )
     is_active = models.BooleanField(
         verbose_name="Активный",
-        default=True
+        default=False
     )
 
     class Meta:
