@@ -21,7 +21,8 @@ class News(models.Model):
     author = models.ForeignKey(
         Author,
         on_delete=models.CASCADE,
-        verbose_name="ID автора"
+        verbose_name="ID автора",
+        related_name='news'
     )
     description = models.TextField(
         blank=True,
