@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+  back:
+    container_name: back
+    build: ../.
+    restart: always
+    env_file:
+      - ../.env
+    volumes:
+      - static_dir:/app/static/
+
+  nginx:
+    container_name: nginx
+    image: nginx:1.23.3-alpine
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - static_dir:/etc/nginx/html/static/
+
+    depends_on:
+      - back
+
+volumes:
+  static_dir:

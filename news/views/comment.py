@@ -13,7 +13,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         news = get_object_or_404(News, news_id=self.kwargs.get('news_id'))
         return news.comments
 
-    def perform_create(self, serializer):
+    def perform_create(self, serializer: CommentSerializer):
         serializer.save(
             news=get_object_or_404(News, news_id=self.kwargs.get('news_id')),
         )
