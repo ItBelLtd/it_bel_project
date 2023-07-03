@@ -42,7 +42,7 @@ class Author(models.Model):
     )
     date_joined = models.DateTimeField(
         verbose_name="Дата регистрации",
-        default=timezone.now
+        default=timezone.now,
     )
     is_active = models.BooleanField(
         verbose_name="Активный",

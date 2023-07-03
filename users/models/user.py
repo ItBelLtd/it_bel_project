@@ -1,11 +1,10 @@
 from django.db import models
+from ..managers.user import UserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
 
-from ..managers.user import UserManager
-from django.contrib.auth.models import AbstractBaseUser
 
-
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     """Модель пользователя"""
 
     user_id = models.AutoField(
@@ -23,14 +22,19 @@ class User(AbstractBaseUser):
         blank=False,
         null=False,
         verbose_name="Почта пользователя",
-        help_text="Email"
+        help_text="Email",
+        unique=True,
     )
     date_joined = models.DateTimeField(
         verbose_name="Дата регистрации",
-        default=timezone.now
+        default=timezone.now,
     )
     is_staff = models.BooleanField(
         verbose_name="Админ",
+        default=False
+    )
+    is_superuser = models.BooleanField(
+        verbose_name='Супер',
         default=False
     )
     is_active = models.BooleanField(
@@ -38,7 +42,7 @@ class User(AbstractBaseUser):
         default=True
     )
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
     objects = UserManager()
 
     def __str__(self):
