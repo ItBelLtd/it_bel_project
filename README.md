@@ -1,15 +1,7 @@
-Raise the project:
+# How to run this project
 
-step 1: python -m venv venv
-
-step 2: source venv/bin/activate
-
-step 3: pip install -r requirements.txt
-
-step 4: DELETE ALL migrations
-
-step 5: python manage.py makemigrations
-
-step 6: python manage.py migrate
-
------------------------------------------
+- Make sure that docker is installed on your system
+- Navigate to the `infra` directory
+- Run command `docker-compose up --build`, on Linux `sudo` required
+- After some time project is available at http://127.0.0.1/
+- Check it by navigating to http://127.0.0.1/api/news, for example
