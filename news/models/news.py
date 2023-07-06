@@ -46,6 +46,10 @@ class News(models.Model):
         verbose_name="Дата добавления",
         help_text="Дата"
     )
+    is_moderated = models.BooleanField(
+        verbose_name='Просмотрена ли модераторами',
+        default=False,
+    )
 
     class Meta:
         verbose_name = "Новость"
