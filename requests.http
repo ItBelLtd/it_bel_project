@@ -1,8 +1,49 @@
-###
-GET http://127.0.0.1:8000/api/news
+# Main endpoints (usually I don't write DELETE, PATCH, PUT methods, only in special cases)
+
+### List all the news
+GET http://127.0.0.1/api/news
+
+### Create new News (crashes due to no permission)
+POST http://127.0.0.1/api/news/
+Content-Type: application/json
+Authorization: Token 
+
+{
+    "title": "title",
+    "content": "content"
+}
+
+### Create new News (error due to token missing) (crashes due to no permission)
+POST http://127.0.0.1/api/news/
+Content-Type: application/json
+
+
+{
+    "title": "title",
+    "content": "content"
+}
+
+### Create new News (error due to data missing)
+POST http://127.0.0.1/api/news/
+
+### List all comments of News with news_id=1
+GET http://127.0.0.1/api/news/1/comments
+
+### List all users
+GET http://127.0.0.1/api/users
+
+### Get one user
+GET http://127.0.0.1/api/users/1
 
 ###
-POST http://127.0.0.1:8000/api/news/
 
-###
-GET http://127.0.0.1:8000/api/news/1/comments
+
+# Moderating functionality
+
+### List all unmoderated News
+GET http://127.0.0.1/api/news/moderate
+
+
+### Approve News with news_id=1 (is_moderated=True)
+POST http://127.0.0.1/api/news/1/approve/
+
