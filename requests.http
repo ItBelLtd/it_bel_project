@@ -13,7 +13,17 @@ Authorization: Token
     "content": "content"
 }
 
-### Create new News (error due to token missing)
+### Create new News (error due to token missing) (crashes due to no permission)
+POST http://127.0.0.1/api/news/
+Content-Type: application/json
+
+
+{
+    "title": "title",
+    "content": "content"
+}
+
+### Create new News (error due to data missing)
 POST http://127.0.0.1/api/news/
 
 ### List all comments of News with news_id=1
@@ -30,5 +40,10 @@ GET http://127.0.0.1/api/users/1
 
 # Moderating functionality
 
-### Approve News (is_moderated=True
+### List all unmoderated News
+GET http://127.0.0.1/api/news/moderate
+
+
+### Approve News with news_id=1 (is_moderated=True)
 POST http://127.0.0.1/api/news/1/approve/
+

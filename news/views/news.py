@@ -12,7 +12,7 @@ class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
 
-    def perform_create(self, serializer):
+    def perform_create(self, serializer: NewsSerializer):
         return serializer.save(author=self.request.user)
 
     @action(

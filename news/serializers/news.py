@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from ..models.news import News
+from users.serializers.author import AuthorSerializer
 
 
 class NewsSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField()
+    author = AuthorSerializer(read_only=True)
 
     class Meta:
         model = News
