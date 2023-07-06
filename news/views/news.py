@@ -33,7 +33,7 @@ class NewsViewSet(viewsets.ModelViewSet):
         # permission_classes=[IsAdminUser, ]
     )
     def approve(self, request: HttpRequest, pk: int):
-        news = News.objects.get(news_id=pk)
+        news = get_object_or_404(News, news_id=pk)
         news.is_moderated = True
         news.save()
         serializer = NewsSerializer(news)
