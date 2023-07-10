@@ -35,8 +35,6 @@ GET http://127.0.0.1/api/users
 ### Get one user
 GET http://127.0.0.1/api/users/1
 
-###
-
 
 # Moderating functionality
 
@@ -47,3 +45,26 @@ GET http://127.0.0.1/api/news/moderate
 ### Approve News with news_id=1 (is_moderated=True)
 POST http://127.0.0.1/api/news/1/approve/
 
+
+# Tokens and users
+
+###
+GET http://127.0.0.1/api/users/
+
+###
+POST http://127.0.0.1/api/users/
+Content-Type: application/json
+
+{
+    "email": "abcdef@abcd.com",
+    "password": "demian197"
+}
+
+###
+POST http://127.0.0.1/auth/token/login/
+Content-Type: application/json
+
+{
+    "email": "abcdef@abcd.com",
+    "password": "demian197"
+}
