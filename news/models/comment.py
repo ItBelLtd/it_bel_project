@@ -40,17 +40,3 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарий"
-
-        constraints = [
-            # check for one out of two owner options
-            models.CheckConstraint(
-                name="one out of two owner options is chosen",
-                check=(
-                    models.Q(
-                        owner_user__isnull=True, owner_author__isnull=False
-                    ) | models.Q(
-                        owner_user__isnull=False, owner_author__isnull=True
-                    )
-                ),
-            )
-        ]

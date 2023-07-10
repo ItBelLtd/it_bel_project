@@ -28,6 +28,7 @@ class Author(models.Model):
         help_text="Возраст"
     )
     email = models.EmailField(
+        unique=True,
         blank=False,
         null=False,
         verbose_name="Почта автора",

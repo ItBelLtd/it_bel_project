@@ -4,7 +4,10 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
+from rest_framework.exceptions import ValidationError
 from ..models.news import News
+from users.models.author import Author
+from users.models.user import User
 from ..serializers.news import NewsSerializer
 
 
@@ -13,7 +16,10 @@ class NewsViewSet(viewsets.ModelViewSet):
     serializer_class = NewsSerializer
 
     def perform_create(self, serializer: NewsSerializer):
-        return serializer.save(author=self.request.user)
+        user: User = self.request.user
+        if not user.author:
+            raise ValidationError('Only authors can create News')
+        return serializer.save(author=user.author)
 
     @action(
         methods=['GET', ],

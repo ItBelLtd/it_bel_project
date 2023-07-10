@@ -8,4 +8,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
     serializer_class = AuthorSerializer
 
     def perform_create(self, serializer: AuthorSerializer):
-        return serializer.save(email=self.request.user.email)
+        author = serializer.save(email=self.request.user.email)
+        self.request.user.author = author
+        self.request.user.save()
+        return author

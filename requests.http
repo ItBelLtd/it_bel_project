@@ -1,29 +1,28 @@
-# Main endpoints (usually I don't write DELETE, PATCH, PUT methods, only in special cases)
+`# Main endpoints (usually I don't write DELETE, PATCH, PUT methods, only in special cases)
 
 ### List all the news
 GET http://127.0.0.1/api/news
 
-### Create new News (crashes due to no permission)
+### Create new News
 POST http://127.0.0.1/api/news/
 Content-Type: application/json
-Authorization: Token 
+Authorization: Token 0e7db5cbfb6c53526fa44b31c86d93cac22d3389
 
 {
     "title": "title",
     "content": "content"
 }
 
-### Create new News (error due to token missing) (crashes due to no permission)
+### Create new News (error 400 due to token missing)
 POST http://127.0.0.1/api/news/
 Content-Type: application/json
-
 
 {
     "title": "title",
     "content": "content"
 }
 
-### Create new News (error due to data missing)
+### Create new News (error 400 due to data missing)
 POST http://127.0.0.1/api/news/
 
 ### List all comments of News with news_id=1
@@ -34,6 +33,23 @@ GET http://127.0.0.1/api/users
 
 ### Get one user
 GET http://127.0.0.1/api/users/1
+
+###
+GET http://127.0.0.1/api/authors
+
+###
+GET http://127.0.0.1/api/authors/1
+
+###
+POST http://127.0.0.1/api/authors/
+Authorization: Token 0e7db5cbfb6c53526fa44b31c86d93cac22d3389
+Content-Type: application/json
+
+{
+    "name": "demian",
+    "surname": "komarov",
+    "age": 17
+}
 
 
 # Moderating functionality
@@ -56,15 +72,24 @@ POST http://127.0.0.1/api/users/
 Content-Type: application/json
 
 {
-    "email": "abcdef@abcd.com",
+    "email": "kdemian@yandex.ru",
     "password": "demian197"
 }
 
 ###
-POST http://127.0.0.1/auth/token/login/
+POST http://127.0.0.1/api/auth/token/login/
 Content-Type: application/json
 
 {
-    "email": "abcdef@abcd.com",
+    "email": "kdemian@yandex.ru",
     "password": "demian197"
 }
+
+
+# Profile
+
+###
+GET http://127.0.0.1/api/users/profile
+Authorization: Token 0e7db5cbfb6c53526fa44b31c86d93cac22d3389
+
+
