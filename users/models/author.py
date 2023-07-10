@@ -9,13 +9,6 @@ class Author(models.Model):
         primary_key=True,
         verbose_name="ID автора"
     )
-    author_name = models.CharField(
-        verbose_name="Ник автора",
-        max_length=150,
-        unique=True,
-        null=False,
-        blank=True
-    )
     name = models.CharField(
         verbose_name="Имя автора",
         max_length=150,

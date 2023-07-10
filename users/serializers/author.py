@@ -3,6 +3,8 @@ from ..models.author import Author
 
 
 class AuthorSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(read_only=True)
+
     class Meta:
         model = Author
         fields = ["author_id", "author_name", "name",

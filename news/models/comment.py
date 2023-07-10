@@ -1,6 +1,5 @@
 from django.db import models
 from users.models.user import User
-from users.models.author import Author
 from django.utils import timezone
 from .news import News
 
@@ -23,7 +22,7 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name='comments'
     )
-    owner_user = models.ForeignKey(
+    owner = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='comments',
@@ -31,14 +30,8 @@ class Comment(models.Model):
         null=True,
         blank=True,
     )
-    owner_author = models.ForeignKey(
-        Author,
-        on_delete=models.CASCADE,
-        related_name='comments',
-        verbose_name='Какой автор оставил',
-        null=True,
-        blank=True,
-
+    as_author = models.BooleanField(
+        verbose_name='Комментарий от автора',
     )
 
     def __str__(self) -> str:
