@@ -6,3 +6,6 @@ Pillow==9.5.0
 pytz==2023.3
 sqlparse==0.4.4
 gunicorn==20.1.0
+djoser==2.2.0
+psycopg2-binary==2.9.6
+
