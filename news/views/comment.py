@@ -16,4 +16,5 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer: CommentSerializer):
         serializer.save(
             news=get_object_or_404(News, news_id=self.kwargs.get('news_id')),
+            author=self.request.user
         )
