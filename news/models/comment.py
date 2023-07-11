@@ -32,6 +32,7 @@ class Comment(models.Model):
     )
     as_author = models.BooleanField(
         verbose_name='Комментарий от автора',
+        default=False,
     )
 
     def __str__(self) -> str:

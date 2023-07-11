@@ -6,7 +6,7 @@ GET http://127.0.0.1/api/news
 ### Create new News
 POST http://127.0.0.1/api/news/
 Content-Type: application/json
-Authorization: Token 0e7db5cbfb6c53526fa44b31c86d93cac22d3389
+Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
 
 {
     "title": "title",
@@ -42,7 +42,7 @@ GET http://127.0.0.1/api/authors/1
 
 ###
 POST http://127.0.0.1/api/authors/
-Authorization: Token 0e7db5cbfb6c53526fa44b31c86d93cac22d3389
+Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
 Content-Type: application/json
 
 {
@@ -90,6 +90,47 @@ Content-Type: application/json
 
 ###
 GET http://127.0.0.1/api/users/profile
-Authorization: Token 0e7db5cbfb6c53526fa44b31c86d93cac22d3389
+Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
 
 
+# Comments
+
+###
+GET http://127.0.0.1/api/news/1/comments
+
+### Create new News
+POST http://127.0.0.1/api/news/
+Content-Type: application/json
+Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+
+{
+    "title": "title",
+    "content": "content"
+}
+
+###
+POST http://127.0.0.1/api/news/1/comments/
+Content-Type: application/json
+Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+
+{
+    "text": "comment"
+}
+
+###
+PATCH http://127.0.0.1/api/news/1/comments/1/
+Content-Type: application/json
+Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+
+{
+    "text": "COMMENT"
+}
+
+###
+PUT http://127.0.0.1/api/news/1/comments/1/
+Content-Type: application/json
+Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+
+{
+    "text": "NEW COMMENT"
+}
