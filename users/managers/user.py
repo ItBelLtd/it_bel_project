@@ -2,7 +2,6 @@ import unicodedata
 
 from django.contrib.auth.models import UserManager as _UserManager
 from django.db.transaction import atomic
-from django.utils import timezone
 
 
 class UserManager(_UserManager):
@@ -15,9 +14,6 @@ class UserManager(_UserManager):
 
         if email:
             email = self.normalize_email(email)
-
-        if not username:
-            username = f'{timezone.now()}'
 
         user = self.model(
             username=unicodedata.normalize("NFKC", username),
