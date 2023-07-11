@@ -22,7 +22,7 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name='comments'
     )
-    owner = models.ForeignKey(
+    author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='comments',

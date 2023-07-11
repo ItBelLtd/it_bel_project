@@ -6,8 +6,8 @@ from .author import AuthorSerializer
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    as_author = serializers.SerializerMethodField(read_only=True)
     news = serializers.SerializerMethodField(read_only=True)
+    as_author = serializers.SerializerMethodField(read_only=True)
 
     def get_news(self, user: User):
         serializer = NewsSerializer(user.author.news, many=True)
