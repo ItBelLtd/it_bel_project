@@ -108,7 +108,7 @@ Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
     "content": "content"
 }
 
-###
+### Create new comment for news with id=1
 POST http://127.0.0.1/api/news/1/comments/
 Content-Type: application/json
 Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
@@ -117,7 +117,7 @@ Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
     "text": "comment"
 }
 
-###
+### Change news with id=1 on News with id=1
 PATCH http://127.0.0.1/api/news/1/comments/1/
 Content-Type: application/json
 Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
@@ -126,7 +126,7 @@ Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
     "text": "COMMENT"
 }
 
-###
+### Change news with id=1 on News with id=1
 PUT http://127.0.0.1/api/news/1/comments/1/
 Content-Type: application/json
 Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
