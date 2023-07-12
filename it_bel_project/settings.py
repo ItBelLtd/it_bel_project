@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'drf_spectacular'
 ]
 
 MIDDLEWARE = [
@@ -151,8 +152,15 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 DJOSER = {
     'LOGIN_FIELD': 'email',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'IT_BEL API',
+    'DESCRIPTION': 'Epic',
+    'VERSION': '1.0.0',
 }
