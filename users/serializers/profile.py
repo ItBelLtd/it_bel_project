@@ -10,6 +10,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     as_author = serializers.SerializerMethodField(read_only=True)
 
     def get_news(self, user: User):
+        if not user.author:
+            return {}
         serializer = NewsSerializer(user.author.news, many=True)
         return serializer.data
 
