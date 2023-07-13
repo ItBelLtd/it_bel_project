@@ -22,7 +22,6 @@ class UserManager(_UserManager):
         )
         user.set_password(password)
         user.save(using=self._db)
-        print(user)
         return user
 
     @atomic
