@@ -5,6 +5,7 @@ from users.serializers.author import AuthorSerializer
 
 class NewsSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True)
+    added = serializers.ReadOnlyField()
 
     class Meta:
         model = News
