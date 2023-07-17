@@ -2,9 +2,6 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from users.permission import IsSuperUser
-from news.permission import AuthorOrReadOnly
-from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
@@ -12,6 +9,7 @@ from ..models.news import News
 from ..serializers.news import NewsSerializer
 from news.permission import AuthorOrReadOnly
 from users.models.user import User
+from users.permission import IsSuperUser
 
 
 class NewsViewSet(viewsets.ModelViewSet):
