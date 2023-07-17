@@ -9,7 +9,7 @@ from news.permission import AuthorOrReadOnly
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
-    permission_classes =[AuthorOrReadOnly]
+    permission_classes = [AuthorOrReadOnly]
 
     def get_queryset(self):
         news = get_object_or_404(News, news_id=self.kwargs.get('news_id'))
