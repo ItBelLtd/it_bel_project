@@ -8,8 +8,8 @@ from rest_framework.response import Response
 from ..models.news import News
 from ..serializers.news import NewsSerializer
 from news.permission import AuthorOrReadOnly
-from users.permission import IsSuperUser
 from users.models.user import User
+from users.permission import IsSuperUser
 
 
 class NewsViewSet(viewsets.ModelViewSet):
