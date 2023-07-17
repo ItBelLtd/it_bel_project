@@ -1,6 +1,7 @@
 from django.db import models
-from users.models.author import Author
 from django.utils import timezone
+
+from users.models.author import Author
 
 
 class News(models.Model):
