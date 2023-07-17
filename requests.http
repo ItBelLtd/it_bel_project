@@ -1,4 +1,4 @@
-`# Main endpoints (usually I don't write DELETE, PATCH, PUT methods, only in special cases)
+# Main endpoints (usually I don't write DELETE, PATCH, PUT methods, only in special cases)
 
 ### List all the news
 GET http://127.0.0.1/api/news
@@ -6,7 +6,7 @@ GET http://127.0.0.1/api/news
 ### Create new News
 POST http://127.0.0.1/api/news/
 Content-Type: application/json
-Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
 
 {
     "title": "title",
@@ -42,7 +42,7 @@ GET http://127.0.0.1/api/authors/1
 
 ###
 POST http://127.0.0.1/api/authors/
-Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
 Content-Type: application/json
 
 {
@@ -82,7 +82,7 @@ Content-Type: application/json
 
 {
     "email": "kdemian@yandex.ru",
-    "password": "demian197"
+    "password": "demian"
 }
 
 
@@ -90,7 +90,7 @@ Content-Type: application/json
 
 ###
 GET http://127.0.0.1/api/users/profile
-Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
 
 
 # Comments
@@ -101,7 +101,7 @@ GET http://127.0.0.1/api/news/1/comments
 ### Create new News
 POST http://127.0.0.1/api/news/
 Content-Type: application/json
-Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
 
 {
     "title": "title",
@@ -111,7 +111,7 @@ Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
 ### Create new comment for news with id=1
 POST http://127.0.0.1/api/news/1/comments/
 Content-Type: application/json
-Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
 
 {
     "text": "comment"
@@ -120,7 +120,7 @@ Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
 ### Change news with id=1 on News with id=1
 PATCH http://127.0.0.1/api/news/1/comments/1/
 Content-Type: application/json
-Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
 
 {
     "text": "COMMENT"
@@ -129,7 +129,7 @@ Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
 ### Change news with id=1 on News with id=1
 PUT http://127.0.0.1/api/news/1/comments/1/
 Content-Type: application/json
-Authorization: Token a40efd187134e580336076ce31d257ce2984a5d6
+Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
 
 {
     "text": "NEW COMMENT"

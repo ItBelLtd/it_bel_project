@@ -5,6 +5,7 @@ from ..models.author import Author
 
 class AuthorSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(read_only=True)
+    date_joined = serializers.ReadOnlyField()
 
     def validate(self, data: dict):
         email = data.get('email')

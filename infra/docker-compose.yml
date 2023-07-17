@@ -1,5 +1,14 @@
 version: "3.3"
 services:
+  db:
+    container_name: db
+    image: postgres:14.6-alpine
+    restart: always
+    env_file:
+      - ../.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
   back:
     container_name: back
     build: ../.
@@ -8,7 +17,11 @@ services:
       - ../.env
     volumes:
       - static_dir:/app/static/
-
+    depends_on:
+      - db
+    command: |
+      bash -c "python3 manage.py migrate;
+        gunicorn it_bel_project.wsgi:application --bind 0:8000"
   nginx:
     container_name: nginx
     image: nginx:1.23.3-alpine
@@ -24,3 +37,4 @@ services:
 
 volumes:
   static_dir:
+  postgres_data:
