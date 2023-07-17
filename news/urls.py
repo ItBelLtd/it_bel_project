@@ -1,8 +1,8 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework.routers import SimpleRouter
-from .views.news import NewsViewSet
-from .views.comment import CommentViewSet
 
+from .views.comment import CommentViewSet
+from .views.news import NewsViewSet
 
 router = SimpleRouter()
 router.register(

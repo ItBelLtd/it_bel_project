@@ -1,7 +1,8 @@
 from django.db import models
-from users.models.user import User
 from django.utils import timezone
+
 from .news import News
+from users.models.user import User
 
 
 class Comment(models.Model):

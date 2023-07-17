@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from news.serializers.news import NewsSerializer
-from ..models.user import User
+
 from ..models.author import Author
+from ..models.user import User
 from .author import AuthorSerializer
+from news.serializers.news import NewsSerializer
 
 
 class ProfileSerializer(serializers.ModelSerializer):

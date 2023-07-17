@@ -1,8 +1,8 @@
 import unicodedata
+from random import randint
 
 from django.contrib.auth.models import UserManager as _UserManager
 from django.db.transaction import atomic
-from random import randint
 
 
 class UserManager(_UserManager):

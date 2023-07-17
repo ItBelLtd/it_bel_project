@@ -6,9 +6,12 @@ from users.permission import IsSuperUser
 from news.permission import AuthorOrReadOnly
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+
 from ..models.news import News
-from users.models.user import User
 from ..serializers.news import NewsSerializer
+from news.permission import AuthorOrReadOnly
+from users.models.user import User
 
 
 class NewsViewSet(viewsets.ModelViewSet):
