@@ -2,8 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
-# Commented until custom IsAdmin
-# from rest_framework.permissions import IsAdminUser
+from users.permission import IsSuperUser
 from news.permission import AuthorOrReadOnly
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
@@ -27,7 +26,7 @@ class NewsViewSet(viewsets.ModelViewSet):
         methods=['GET', ],
         detail=False,
         url_path='moderate',
-        # permission_classes=[IsAdminUser, ]
+        permission_classes=[IsSuperUser, ]
     )
     def moderate(self, request: HttpRequest):
         news = News.objects.filter(is_moderated=False)
@@ -38,7 +37,7 @@ class NewsViewSet(viewsets.ModelViewSet):
         methods=['POST', ],
         detail=True,
         url_path='approve',
-        # permission_classes=[IsAdminUser, ]
+        permission_classes=[IsSuperUser, ]
     )
     def approve(self, request: HttpRequest, pk: int):
         news = get_object_or_404(News, news_id=pk)

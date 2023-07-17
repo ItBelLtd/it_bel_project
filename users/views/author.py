@@ -8,6 +8,7 @@ from news.serializers.news import NewsSerializer
 from ..models.author import Author
 from ..serializers.author import AuthorSerializer
 from users.permission import AuthorOwnerOrReadOnly
+from users.permission import IsSuperUser
 
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
@@ -24,7 +25,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
         methods=['GET', ],
         detail=True,
         url_path='news',
-        # permission_classes=[IsAdminUser, ]
+        permission_classes=[IsSuperUser, ]
     )
     def get_author_news(self, request: HttpRequest, pk: int):
         author = get_object_or_404(Author, author_id=pk)
