@@ -5,12 +5,11 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
+from ..models.news import News
+from ..serializers.news import NewsSerializer
 # Commented until custom IsAdmin
 # from rest_framework.permissions import IsAdminUser
 from news.permission import AuthorOrReadOnly
-
-from ..models.news import News
-from ..serializers.news import NewsSerializer
 from users.models.user import User
 
 

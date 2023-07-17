@@ -4,10 +4,9 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from news.serializers.news import NewsSerializer
-
 from ..models.author import Author
 from ..serializers.author import AuthorSerializer
+from news.serializers.news import NewsSerializer
 from users.permission import AuthorOwnerOrReadOnly
 
 

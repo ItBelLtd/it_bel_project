@@ -1,11 +1,10 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 
-from news.permission import AuthorOrReadOnly
-
 from ..models.comment import Comment
 from ..models.news import News
 from ..serializers.comment import CommentSerializer
+from news.permission import AuthorOrReadOnly
 
 
 class CommentViewSet(viewsets.ModelViewSet):
