@@ -7,8 +7,6 @@ from rest_framework.response import Response
 
 from ..models.news import News
 from ..serializers.news import NewsSerializer
-# Commented until custom IsAdmin
-# from rest_framework.permissions import IsAdminUser
 from news.permission import AuthorOrReadOnly
 from users.models.user import User
 
@@ -28,7 +26,6 @@ class NewsViewSet(viewsets.ModelViewSet):
         methods=['GET', ],
         detail=False,
         url_path='moderate',
-        # permission_classes=[IsAdminUser, ]
     )
     def moderate(self, request: HttpRequest):
         news = News.objects.filter(is_moderated=False)
@@ -39,7 +36,6 @@ class NewsViewSet(viewsets.ModelViewSet):
         methods=['POST', ],
         detail=True,
         url_path='approve',
-        # permission_classes=[IsAdminUser, ]
     )
     def approve(self, request: HttpRequest, pk: int):
         news = get_object_or_404(News, news_id=pk)

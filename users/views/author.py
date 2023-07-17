@@ -25,7 +25,6 @@ class AuthorViewSet(viewsets.ModelViewSet):
         methods=['GET', ],
         detail=True,
         url_path='news',
-        # permission_classes=[IsAdminUser, ]
     )
     def get_author_news(self, request: HttpRequest, pk: int):
         author = get_object_or_404(Author, author_id=pk)
