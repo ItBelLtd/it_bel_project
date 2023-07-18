@@ -49,6 +49,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name="Активный",
         default=True
     )
+    is_moderator = models.BooleanField(
+        verbose_name='Модератор',
+        default=False
+    )
 
     USERNAME_FIELD = 'email'
     objects = UserManager()
