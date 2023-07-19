@@ -8,7 +8,6 @@ from ..serializers.profile import ProfileSerializer
 from ..serializers.users import UserSerializer
 from users.permission import UserOwnerOrReadOnly
 
-
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
