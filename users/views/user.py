@@ -2,11 +2,11 @@ from django.http import HttpRequest
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
 from ..models.user import User
 from ..serializers.profile import ProfileSerializer
 from ..serializers.users import UserSerializer
 from users.permission import UserOwnerOrReadOnly
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
