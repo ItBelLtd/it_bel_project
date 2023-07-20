@@ -51,7 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=True
     )
     is_moderator = models.BooleanField(
-        verbose_name="Мойдератор",
+        verbose_name="Модератор",
         default=False
     )
 

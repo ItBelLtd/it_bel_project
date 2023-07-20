@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from ..models.author import Author
 from ..serializers.author import AuthorSerializer
 from news.serializers.news import NewsSerializer
-from users.permission import AuthorOwnerOrReadOnly, IsSuperUser
+from users.permission import AuthorOwnerOrReadOnly
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
@@ -25,7 +25,6 @@ class AuthorViewSet(viewsets.ModelViewSet):
         methods=['GET', ],
         detail=True,
         url_path='news',
-        permission_classes=[IsSuperUser, ]
     )
     def get_author_news(self, request: HttpRequest, pk: int):
         author = get_object_or_404(Author, author_id=pk)
