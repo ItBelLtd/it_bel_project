@@ -9,10 +9,7 @@ class UserOwnerOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request: HttpRequest, view, obj: User):
         if not request.user.is_authenticated:
             return False
-        return (
-                (request.user and request.user.is_superuser)
-                or obj.user_id == request.user.user_id
-        )
+        return request.user.is_superuser or obj.user_id == request.user.user_id
 
 
 class AuthorOwnerOrReadOnly(permissions.BasePermission):
@@ -35,7 +32,7 @@ class IsSuperUser(permissions.BasePermission):
     def has_permission(self, request, view):
         if not request.user.is_authenticated:
             return False
-        return request.user and request.user.is_superuser
+        return request.user.is_superuser
 
 
 class IsModerator(permissions.BasePermission):
@@ -46,5 +43,4 @@ class IsModerator(permissions.BasePermission):
         return request.user.is_moderator or request.user.is_superuser
 
     def has_object_permission(self, request: HttpRequest, view, obj):
-        return ((request.user and request.user.is_moderator)
-                or (request.user and request.user.is_superuser))
+        return request.user.is_moderator or request.user.is_superuser
