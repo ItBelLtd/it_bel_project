@@ -6,16 +6,10 @@ from .models.user import User
 
 
 class UserOwnerOrReadOnly(permissions.BasePermission):
-    def has_permission(self, request: HttpRequest, view):
-        if request.method in permissions.SAFE_METHODS:
-            return request.user and request.user.is_superuser
-        return True
-
     def has_object_permission(self, request: HttpRequest, view, obj: User):
-        return (
-                (request.user and request.user.is_superuser)
-                or obj.user_id == request.user.user_id
-        )
+        if not request.user.is_authenticated:
+            return False
+        return request.user.is_superuser or obj.user_id == request.user.user_id
 
 
 class AuthorOwnerOrReadOnly(permissions.BasePermission):
@@ -29,11 +23,24 @@ class AuthorOwnerOrReadOnly(permissions.BasePermission):
         return (
                 request.method in permissions.SAFE_METHODS
                 or obj.author_id == request.user.author_id
-                or (request.user and request.user.is_superuser)
+                or request.user.is_superuser
         )
 
 
 class IsSuperUser(permissions.BasePermission):
 
     def has_permission(self, request, view):
-        return request.user and request.user.is_superuser
+        if not request.user.is_authenticated:
+            return False
+        return request.user.is_superuser
+
+
+class IsModerator(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        if not request.user.is_authenticated:
+            return False
+        return request.user.is_moderator or request.user.is_superuser
+
+    def has_object_permission(self, request: HttpRequest, view, obj):
+        return request.user.is_moderator or request.user.is_superuser

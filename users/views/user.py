@@ -18,7 +18,7 @@ class UserViewSet(viewsets.ModelViewSet):
         methods=['GET'],
         url_path='profile',
         detail=False,
-        # permission_classes=[AuthorOrReadOnly, ]
+        permission_classes=[UserOwnerOrReadOnly, ]
     )
     def profile(self, request: HttpRequest):
         serializer = ProfileSerializer(request.user)
