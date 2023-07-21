@@ -25,7 +25,7 @@ class AuthorOwnerOrReadOnly(permissions.BasePermission):
         return (
             request.method in permissions.SAFE_METHODS
             or obj.author_id == request.user.author_id
-            or (request.user and request.user.is_superuser)
+            or request.user.is_superuser
         )
 
 
