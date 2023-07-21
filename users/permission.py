@@ -26,10 +26,26 @@ class AuthorOwnerOrReadOnly(permissions.BasePermission):
             request.method in permissions.SAFE_METHODS
             or obj.author_id == request.user.author_id
             or (request.user and request.user.is_superuser)
+                request.method in permissions.SAFE_METHODS
+                or obj.author_id == request.user.author_id
+                or request.user.is_superuser
         )
 
 
 class IsSuperUser(permissions.BasePermission):
 
     def has_permission(self, request: HttpRequest, view):
-        return request.user and request.user.is_superuser
+        if not request.user.is_authenticated:
+            return False
+        return request.user.is_superuser
+
+
+class IsModerator(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        if not request.user.is_authenticated:
+            return False
+        return request.user.is_moderator or request.user.is_superuser
+
+    def has_object_permission(self, request: HttpRequest, view, obj):
+        return request.user.is_moderator or request.user.is_superuser

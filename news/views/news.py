@@ -9,7 +9,7 @@ from ..models.news import News
 from ..serializers.news import NewsSerializer
 from news.permission import AuthorOrReadOnly
 from users.models.user import User
-from users.permission import IsSuperUser
+from users.permission import IsModerator
 
 
 class NewsViewSet(viewsets.ModelViewSet):
@@ -27,7 +27,7 @@ class NewsViewSet(viewsets.ModelViewSet):
         methods=['GET', ],
         detail=False,
         url_path='moderate',
-        permission_classes=[IsSuperUser, ]
+        permission_classes=[IsModerator, ]
     )
     def moderate(self, request: HttpRequest):
         news = News.objects.filter(is_moderated=False)
@@ -38,7 +38,7 @@ class NewsViewSet(viewsets.ModelViewSet):
         methods=['POST', ],
         detail=True,
         url_path='approve',
-        permission_classes=[IsSuperUser, ]
+        permission_classes=[IsModerator, ]
     )
     def approve(self, request: HttpRequest, pk: int):
         news = get_object_or_404(News, news_id=pk)
