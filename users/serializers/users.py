@@ -4,12 +4,13 @@ from rest_framework import serializers
 from ..models.user import User
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    date_joined = serializers.CharField(read_only=True)
 
     class Meta:
         model = User
-        fields = ['user_id', 'username', "email", "date_joined", "password"]
+        fields = ['user_id', 'username', 'email', 'date_joined', 'password']
 
     def validate_password(self, password):
         validate_password(password)
@@ -25,3 +26,17 @@ class UserSerializer(serializers.ModelSerializer):
         except serializers.ValidationError as exc:
             user.delete()
             raise exc
+
+
+class UserListSerializer(serializers.ModelSerializer):
+    date_joined = serializers.CharField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['user_id', 'username', 'date_joined']
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
