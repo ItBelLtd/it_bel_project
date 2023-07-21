@@ -84,22 +84,13 @@ WSGI_APPLICATION = "it_bel_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
 
-    # НАСТРОЙКИ ДЛЯ PostgreSQL, НЕ УДАЛЯТЬ
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT')
-    }
-}
+if env('DOCKER', default=False):
+    from .db_config import DOCKER_DB
+    DATABASES = DOCKER_DB
+else:
+    from .db_config import LOCAL_DB
+    DATABASES = LOCAL_DB
 
 
 # Password validation
