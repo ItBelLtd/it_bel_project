@@ -1,12 +1,4 @@
-from pathlib import Path
-
-from environ import Env
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-env = Env(DEBUG=(bool, False))
-Env.read_env(str(BASE_DIR / ".env"))
-
+from .settings import BASE_DIR, env
 
 DOCKER_DB = {
     'default': {

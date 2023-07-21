@@ -24,6 +24,10 @@ class ProfileSerializer(serializers.ModelSerializer):
         serializer = AuthorSerializer(author)
         return serializer.data
 
+    def destroy(self):
+        user: User = self.instance
+        return user.delete()
+
     class Meta:
         model = User
         fields = ['user_id', 'username', 'email', 'as_author', 'news']

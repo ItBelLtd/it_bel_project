@@ -15,7 +15,3 @@ COPY . .
 RUN python3 manage.py collectstatic --no-input
 
 RUN python3 manage.py makemigrations
-
-# RUN python3 manage.py migrate
-
-# CMD ["gunicorn", "it_bel_project.wsgi:application", "--bind", "0:8000" ]

@@ -61,8 +61,8 @@ local_settings.py
 migrations
 static
 media
-# db.sqlite3
-# db.sqlite3-journal
+db.sqlite3
+db.sqlite3-journal
 
 # Flask stuff:
 instance/
