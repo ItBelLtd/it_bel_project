@@ -3,7 +3,6 @@ from django.db import models
 from django.utils import timezone
 
 from ..managers.user import UserManager
-from .author import Author
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -26,13 +25,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name="Почта пользователя",
         help_text="Email",
         unique=True,
-    )
-    author = models.OneToOneField(
-        Author,
-        on_delete=models.CASCADE,
-        related_name='user',
-        null=True,
-        blank=True,
     )
     date_joined = models.DateTimeField(
         verbose_name="Дата регистрации",
