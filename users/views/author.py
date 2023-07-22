@@ -16,10 +16,10 @@ class AuthorViewSet(viewsets.ModelViewSet):
     permission_classes = [AuthorOwnerOrReadOnly]
 
     def perform_create(self, serializer: AuthorSerializer):
-        author = serializer.save(email=self.request.user.email)
-        self.request.user.author = author
-        self.request.user.save()
-        return author
+        return serializer.save(
+            email=self.request.user.email,
+            user=self.request.user
+        )
 
     @action(
         methods=['GET', ],

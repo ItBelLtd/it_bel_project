@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from .user import User
+
 
 class Author(models.Model):
     """Модель автора"""
@@ -8,6 +10,13 @@ class Author(models.Model):
     author_id = models.AutoField(
         primary_key=True,
         verbose_name="ID автора"
+    )
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='author',
+        null=True,
+        blank=True,
     )
     name = models.CharField(
         verbose_name="Имя автора",
