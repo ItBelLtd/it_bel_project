@@ -10,7 +10,7 @@ from ..serializers.news import NewsSerializer
 from news.permission import AuthorOrReadOnly
 from users.models.user import User
 from users.permission import IsModerator
-from likes.mixins import LikedMixin
+from news.likes.mixins import LikedMixin
 
 
 class NewsViewSet(LikedMixin, viewsets.ModelViewSet):

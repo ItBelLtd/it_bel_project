@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericRelation
-from likes.models import Like
 
+from .like import Like
 from .news import News
 from users.models.user import User
 
