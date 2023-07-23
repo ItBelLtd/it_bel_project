@@ -11,9 +11,11 @@ from news.permission import AuthorOrReadOnly
 from users.models.user import User
 from users.permission import IsModerator
 from drf_yasg.utils import swagger_auto_schema
+from news.likes.mixins import LikedMixin
 
 
-class NewsViewSet(viewsets.ModelViewSet):
+class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
+
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     permission_classes = [AuthorOrReadOnly]
@@ -24,7 +26,7 @@ class NewsViewSet(viewsets.ModelViewSet):
             raise ValidationError('Only authors can create News')
         return serializer.save(author=user.author)
 
-    # @swagger_auto_schema(auto_schema=None)
+    @swagger_auto_schema(auto_schema=None)
     @action(
         methods=['GET', ],
         detail=False,
@@ -36,7 +38,7 @@ class NewsViewSet(viewsets.ModelViewSet):
         serializer = NewsSerializer(news, many=True)
         return Response(serializer.data)
 
-    # @swagger_auto_schema(auto_schema=None)
+    @swagger_auto_schema(auto_schema=None)
     @action(
         methods=['POST', ],
         detail=True,
