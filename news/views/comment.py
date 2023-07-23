@@ -5,9 +5,10 @@ from ..models.comment import Comment
 from ..models.news import News
 from ..serializers.comment import CommentSerializer
 from news.permission import AuthorOrReadOnly
+from likes.mixins import LikedMixin
 
 
-class CommentViewSet(viewsets.ModelViewSet):
+class CommentViewSet(LikedMixin, viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
     permission_classes = [AuthorOrReadOnly]

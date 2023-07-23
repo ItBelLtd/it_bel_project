@@ -10,9 +10,11 @@ from ..serializers.news import NewsSerializer
 from news.permission import AuthorOrReadOnly
 from users.models.user import User
 from users.permission import IsModerator
+from likes.mixins import LikedMixin
 
 
-class NewsViewSet(viewsets.ModelViewSet):
+class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
+
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     permission_classes = [AuthorOrReadOnly]
