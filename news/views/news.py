@@ -7,10 +7,10 @@ from rest_framework.response import Response
 
 from ..models.news import News
 from ..serializers.news import NewsSerializer
+from news.mixins import LikedMixin
 from news.permission import AuthorOrReadOnly
 from users.models.user import User
 from users.permission import IsModerator
-from news.likes.mixins import LikedMixin
 
 
 class NewsViewSet(LikedMixin, viewsets.ModelViewSet):

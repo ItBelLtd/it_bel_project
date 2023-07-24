@@ -3,10 +3,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from news.likes import services
+from news import services
 
 
-class LikedMixin(GenericViewSet):
+class LikedMixin:
 
     @action(detail=True,
             methods=['POST'],
