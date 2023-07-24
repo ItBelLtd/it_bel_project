@@ -26,7 +26,6 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
             raise ValidationError({'detail': 'Only authors can create News'})
         return serializer.save(author=user.author)
 
-    # @swagger_auto_schema(auto_schema=None)
     @action(
         methods=['GET', ],
         detail=False,
@@ -38,7 +37,6 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
         serializer = NewsSerializer(news, many=True)
         return Response(serializer.data)
 
-    # @swagger_auto_schema(auto_schema=None)
     @action(
         methods=['POST', ],
         detail=True,
