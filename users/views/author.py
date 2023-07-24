@@ -1,7 +1,7 @@
-from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.request import HttpRequest
 from rest_framework.response import Response
 
 from ..models.author import Author
@@ -16,10 +16,10 @@ class AuthorViewSet(viewsets.ModelViewSet):
     permission_classes = [AuthorOwnerOrReadOnly]
 
     def perform_create(self, serializer: AuthorSerializer):
-        author = serializer.save(email=self.request.user.email)
-        self.request.user.author = author
-        self.request.user.save()
-        return author
+        return serializer.save(
+            email=self.request.user.email,
+            user=self.request.user
+        )
 
     @action(
         methods=['GET', ],

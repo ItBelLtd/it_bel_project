@@ -1,6 +1,8 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils import timezone
 
+from .like import Like
 from users.models.author import Author
 
 
@@ -51,6 +53,14 @@ class News(models.Model):
         verbose_name='Просмотрена ли модераторами',
         default=False,
     )
+    likes = GenericRelation(Like)
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def total_likes(self):
+        return self.likes.count()
 
     class Meta:
         verbose_name = "Новость"

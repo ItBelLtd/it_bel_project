@@ -1,18 +1,20 @@
-from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
+from rest_framework.request import HttpRequest
 from rest_framework.response import Response
 
 from ..models.news import News
 from ..serializers.news import NewsSerializer
+from news.mixins import LikedMixin
 from news.permission import AuthorOrReadOnly
 from users.models.user import User
 from users.permission import IsModerator
 
 
-class NewsViewSet(viewsets.ModelViewSet):
+class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
+
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     permission_classes = [AuthorOrReadOnly]

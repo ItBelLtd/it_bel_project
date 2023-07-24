@@ -1,5 +1,5 @@
-from django.http import HttpRequest
 from rest_framework import permissions
+from rest_framework.request import HttpRequest
 
 from .models.comment import Comment
 from .models.news import News
