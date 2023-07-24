@@ -11,7 +11,6 @@ from news.mixins import LikedMixin
 from news.permission import AuthorOrReadOnly
 from users.models.user import User
 from users.permission import IsModerator
-from drf_yasg.utils import swagger_auto_schema
 
 
 class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
