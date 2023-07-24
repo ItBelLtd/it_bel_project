@@ -21,8 +21,8 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
 
     def perform_create(self, serializer: NewsSerializer):
         user: User = self.request.user
-        if not user.author:
-            raise ValidationError('Only authors can create News')
+        if not hasattr(user, 'author'):
+            raise ValidationError({'detail': 'Only authors can create News'})
         return serializer.save(author=user.author)
 
     @action(
