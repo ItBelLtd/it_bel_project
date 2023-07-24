@@ -3,6 +3,9 @@
 ### List all the news
 GET http://127.0.0.1/api/news
 
+###
+GET http://127.0.0.1/api/news/1
+
 ### Create new News
 POST http://127.0.0.1/api/news/
 Content-Type: application/json
@@ -117,7 +120,7 @@ Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
     "text": "comment"
 }
 
-### Change news with id=1 on News with id=1
+### Change Comment with id=1 on News with id=1
 PATCH http://127.0.0.1/api/news/1/comments/1/
 Content-Type: application/json
 Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
@@ -126,7 +129,7 @@ Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
     "text": "COMMENT"
 }
 
-### Change news with id=1 on News with id=1
+### Change comment with id=1 on News with id=1
 PUT http://127.0.0.1/api/news/1/comments/1/
 Content-Type: application/json
 Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
@@ -134,3 +137,10 @@ Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
 {
     "text": "NEW COMMENT"
 }
+
+###
+DELETE http://127.0.0.1/api/users/profile
+Authorization: Token 1fa8698661a1be782368cb7dd9e464d18226ad7a
+
+###
+DELETE http://127.0.0.1/api/users/profile
