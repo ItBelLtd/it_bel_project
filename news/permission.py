@@ -16,6 +16,6 @@ class AuthorOrReadOnly(permissions.BasePermission):
             self, request: HttpRequest, view, obj: Comment | News
     ):
         return (
-            request.method in permissions.SAFE_METHODS
-            or obj.author_id == request.user.author_id
+            obj.author == request.user.author
+            or request.method in permissions.SAFE_METHODS
         )

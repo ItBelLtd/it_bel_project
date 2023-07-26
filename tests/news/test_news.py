@@ -9,9 +9,12 @@ from users.models.user import User
 class NewsTestCase(APITestCase):
 
     def setUp(self):
-        self.user = User.objects.create_superuser(email="test@gmail.com", password="testtest123")
+        self.user = User.objects.create_superuser(
+            email="test@gmail.com", password="testtest123")
+
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
+
         self.author = Author.objects.create(
             author_id=1,
             user=self.user,
@@ -21,6 +24,7 @@ class NewsTestCase(APITestCase):
             email="test@gmail.com",
             is_active=True
         )
+
         self.news = News.objects.create(
             news_id=1,
             title="test title",

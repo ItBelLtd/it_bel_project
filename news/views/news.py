@@ -17,7 +17,7 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
 
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-    permission_classes = [AuthorOrReadOnly]
+    permission_classes = [AuthorOrReadOnly, ]
 
     def perform_create(self, serializer: NewsSerializer):
         user: User = self.request.user
