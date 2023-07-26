@@ -1,8 +1,9 @@
-from news.models.news import News
-from users.models.author import Author
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
+
+from news.models.news import News
+from users.models.author import Author
 from users.models.user import User
 
 
