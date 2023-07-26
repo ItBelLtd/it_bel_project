@@ -14,4 +14,4 @@ class Like(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     def __str__(self):
-        return f'{self.user} liked {self.content_object}'
+        return f'{self.user} liked {self.content_type}: {self.content_object}'
