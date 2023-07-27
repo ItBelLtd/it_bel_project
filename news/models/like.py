@@ -1,7 +1,7 @@
-from django.db import models
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.db import models
 
 
 class Like(models.Model):
@@ -14,4 +14,4 @@ class Like(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     def __str__(self):
-        return f'{self.user} liked {self.content_object}'
+        return f'{self.user} liked {self.content_type}: {self.content_object}'

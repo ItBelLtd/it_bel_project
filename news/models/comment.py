@@ -1,6 +1,6 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils import timezone
-from django.contrib.contenttypes.fields import GenericRelation
 
 from .like import Like
 from .news import News
@@ -43,7 +43,7 @@ class Comment(models.Model):
         return self.text
 
     @property
-    def total_likes(self):
+    def total_likes(self) -> int:
         return self.likes.count()
 
     class Meta:

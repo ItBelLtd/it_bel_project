@@ -4,8 +4,8 @@ from rest_framework import viewsets
 from ..models.comment import Comment
 from ..models.news import News
 from ..serializers.comment import CommentSerializer
+from news.mixins import LikedMixin
 from news.permission import AuthorOrReadOnly
-from news.likes.mixins import LikedMixin
 
 
 class CommentViewSet(LikedMixin, viewsets.ModelViewSet):

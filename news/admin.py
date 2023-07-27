@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 from .models.comment import Comment
-from .models.news import News
 from .models.like import Like
+from .models.news import News
 
 
 @admin.register(News)

@@ -12,7 +12,9 @@ class AuthorSerializer(serializers.ModelSerializer):
         email = data.get('email')
         author = Author.objects.filter(email=email).first()
         if author:
-            raise ValidationError('You have already created an author')
+            raise ValidationError(
+                {'detail': 'You have already created an author'}
+            )
         return super().validate(data)
 
     class Meta:

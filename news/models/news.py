@@ -1,6 +1,6 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils import timezone
-from django.contrib.contenttypes.fields import GenericRelation
 
 from .like import Like
 from users.models.author import Author
@@ -59,7 +59,7 @@ class News(models.Model):
         return self.title
 
     @property
-    def total_likes(self):
+    def total_likes(self) -> int:
         return self.likes.count()
 
     class Meta:

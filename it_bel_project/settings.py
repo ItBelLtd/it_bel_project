@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'drf_yasg'
+    'drf_spectacular'
 ]
 
 MIDDLEWARE = [

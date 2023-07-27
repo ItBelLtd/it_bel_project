@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
+from rest_framework import filters, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.request import HttpRequest
@@ -7,11 +7,10 @@ from rest_framework.response import Response
 
 from ..models.news import News
 from ..serializers.news import NewsSerializer
+from news.mixins import LikedMixin
 from news.permission import AuthorOrReadOnly
 from users.models.user import User
 from users.permission import IsModerator
-from drf_yasg.utils import swagger_auto_schema
-from news.likes.mixins import LikedMixin
 
 
 class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
@@ -19,14 +18,15 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     permission_classes = [AuthorOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title']
 
     def perform_create(self, serializer: NewsSerializer):
         user: User = self.request.user
-        if not user.author:
-            raise ValidationError('Only authors can create News')
+        if not hasattr(user, 'author'):
+            raise ValidationError({'detail': 'Only authors can create News'})
         return serializer.save(author=user.author)
 
-    @swagger_auto_schema(auto_schema=None)
     @action(
         methods=['GET', ],
         detail=False,
@@ -38,7 +38,6 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
         serializer = NewsSerializer(news, many=True)
         return Response(serializer.data)
 
-    @swagger_auto_schema(auto_schema=None)
     @action(
         methods=['POST', ],
         detail=True,
