@@ -24,8 +24,7 @@ class AuthorOwnerOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request: HttpRequest, view, obj: Author):
         return (
             request.method in permissions.SAFE_METHODS
-            or obj.author_id == request.user.author_id
-            or request.user.is_superuser
+            or obj == request.user.author
         )
 
 
