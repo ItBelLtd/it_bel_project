@@ -7,11 +7,13 @@ from .views.user import UserViewSet
 router = SimpleRouter()
 router.register(
     'authors',
-    AuthorViewSet
+    AuthorViewSet,
+    basename='authors'
 )
 router.register(
     'users',
-    UserViewSet
+    UserViewSet,
+    basename='users'
 )
 
 

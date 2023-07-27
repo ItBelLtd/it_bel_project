@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from ..models.news import News
 from ..serializers.news import NewsSerializer
 from news.mixins import LikedMixin
-from news.permission import AuthorOrReadOnly
+from news.permission import AuthorOrReadOnlyNews
 from users.models.user import User
 from users.permission import IsModerator
 
@@ -17,7 +17,7 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
 
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-    permission_classes = [AuthorOrReadOnly]
+    permission_classes = [AuthorOrReadOnlyNews]
     filter_backends = [filters.SearchFilter]
     search_fields = ['title']
 

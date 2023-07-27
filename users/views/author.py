@@ -3,6 +3,7 @@ from rest_framework import filters, viewsets
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
+from rest_framework.permissions import IsAdminUser
 
 from ..models.author import Author
 from ..serializers.author import AuthorSerializer
@@ -13,7 +14,7 @@ from users.permission import AuthorOwnerOrReadOnly
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
-    permission_classes = [AuthorOwnerOrReadOnly]
+    permission_classes = [AuthorOwnerOrReadOnly, IsAdminUser]
     filter_backends = [filters.SearchFilter]
     search_fields = ['surname', 'name']
 
