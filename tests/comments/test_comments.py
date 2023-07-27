@@ -2,13 +2,13 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
-from news.models.news import News
 from news.models.comment import Comment
+from news.models.news import News
 from users.models.author import Author
 from users.models.user import User
 
 
-class NewsTestCase(APITestCase):
+class CommentTestCase(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_superuser(

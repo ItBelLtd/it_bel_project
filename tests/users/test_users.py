@@ -5,7 +5,7 @@ from rest_framework.test import APIClient, APITestCase
 from users.models.user import User
 
 
-class userTestCase(APITestCase):
+class UserTestCase(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_superuser(
