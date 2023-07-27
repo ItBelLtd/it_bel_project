@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
+from rest_framework import filters, viewsets
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
@@ -14,6 +14,8 @@ class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = [AuthorOwnerOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['surname', 'name']
 
     def perform_create(self, serializer: AuthorSerializer):
         return serializer.save(
