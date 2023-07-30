@@ -5,7 +5,7 @@ from .models.comment import Comment
 from .models.news import News
 
 
-class AuthorOrReadOnly(permissions.BasePermission):
+class AuthorOrReadOnlyNews(permissions.BasePermission):
     def has_permission(self, request: HttpRequest, view):
         return (
             request.method in permissions.SAFE_METHODS
@@ -16,6 +16,22 @@ class AuthorOrReadOnly(permissions.BasePermission):
             self, request: HttpRequest, view, obj: Comment | News
     ):
         return (
+            obj.author == request.user.author
+            or request.method in permissions.SAFE_METHODS
+        )
+
+
+class AuthorOrReadOnlyComments(permissions.BasePermission):
+    def has_permission(self, request: HttpRequest, view):
+        return (
             request.method in permissions.SAFE_METHODS
-            or obj.author_id == request.user.author_id
+            or request.user.is_authenticated
+        )
+
+    def has_object_permission(
+            self, request: HttpRequest, view, obj: Comment | News
+    ):
+        return (
+            obj.author == request.user
+            or request.method in permissions.SAFE_METHODS
         )

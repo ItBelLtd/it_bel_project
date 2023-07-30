@@ -8,10 +8,12 @@ router = SimpleRouter()
 router.register(
     'news',
     NewsViewSet,
+    basename='news'
 )
 router.register(
     r'news/(?P<news_id>\d+)/comments',
     CommentViewSet,
+    basename='comments'
 )
 
 

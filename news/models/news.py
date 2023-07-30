@@ -59,9 +59,10 @@ class News(models.Model):
         return self.title
 
     @property
-    def total_likes(self):
+    def total_likes(self) -> int:
         return self.likes.count()
 
     class Meta:
         verbose_name = "Новость"
         verbose_name_plural = "Новости"
+        ordering = ['-added']

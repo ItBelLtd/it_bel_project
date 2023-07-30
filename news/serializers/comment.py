@@ -5,6 +5,7 @@ from ..models.comment import Comment
 
 class CommentSerializer(serializers.ModelSerializer):
     added = serializers.ReadOnlyField()
+    total_likes = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Comment

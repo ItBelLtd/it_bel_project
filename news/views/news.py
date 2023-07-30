@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
+from rest_framework import filters, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.request import HttpRequest
@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from ..models.news import News
 from ..serializers.news import NewsSerializer
 from news.mixins import LikedMixin
-from news.permission import AuthorOrReadOnly
+from news.permission import AuthorOrReadOnlyNews
 from users.models.user import User
 from users.permission import IsModerator
 
@@ -17,12 +17,14 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
 
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-    permission_classes = [AuthorOrReadOnly]
+    permission_classes = [AuthorOrReadOnlyNews]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title']
 
     def perform_create(self, serializer: NewsSerializer):
         user: User = self.request.user
-        if not user.author:
-            raise ValidationError('Only authors can create News')
+        if not hasattr(user, 'author'):
+            raise ValidationError({'detail': 'Only authors can create News'})
         return serializer.save(author=user.author)
 
     @action(

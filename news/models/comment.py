@@ -43,9 +43,10 @@ class Comment(models.Model):
         return self.text
 
     @property
-    def total_likes(self):
+    def total_likes(self) -> int:
         return self.likes.count()
 
     class Meta:
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарий"
+        ordering = ['-added']
