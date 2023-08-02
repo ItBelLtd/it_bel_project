@@ -10,7 +10,7 @@ from ..serializers.follow import FollowSerializer
 from ..serializers.profile import ProfileSerializer
 from ..serializers.users import (UserCreateSerializer, UserListSerializer,
                                  UserUpdateSerializer)
-from users.permission import UserOwnerOrReadOnly
+from users.permissions.UserOwnerOrReadOnly import UserOwnerOrReadOnly
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -27,7 +27,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @action(
         methods=['GET'],
         url_path='profile',
-        detail=True,
+        detail=False,
         permission_classes=[UserOwnerOrReadOnly, ],
     )
     def profile(self, request: HttpRequest):
@@ -50,10 +50,10 @@ class UserViewSet(viewsets.ModelViewSet):
     @action(
         methods=['GET', ],
         detail=True,
-        url_path='followers',
+        url_path='following',
     )
-    def author_follower_list(self, request: HttpRequest, pk: int):
+    def user_following_list(self, request: HttpRequest, pk: int):
         user = get_object_or_404(User, user_id=pk)
-        authors = Follow.objects.filter(follower=user.user_id)
-        serializer = FollowSerializer(authors, many=True)
+        following_authors = Follow.objects.filter(follower=user)
+        serializer = FollowSerializer(following_authors, many=True)
         return Response(serializer.data)

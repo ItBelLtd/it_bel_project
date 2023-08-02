@@ -9,7 +9,7 @@ from ..models.follow import Follow
 from ..serializers.author import AuthorSerializer
 from ..serializers.follow import FollowSerializer
 from news.serializers.news import NewsSerializer
-from users.permission import AuthorOwnerOrReadOnly
+from users.permissions.AuthorOwnerOrReadOnly import AuthorOwnerOrReadOnly
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
@@ -50,7 +50,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
         serializer = FollowSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data)
+        return Response({'detail': 'CREATED'}, status=201)
 
     @action(
         methods=['POST', ],
@@ -63,7 +63,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
             author=pk
         )
         follow.delete()
-        return Response({'detail': 'Success'}, status=204)
+        return Response({'detail': 'NO_CONTENT'}, status=204)
 
     @action(
         methods=['GET', ],

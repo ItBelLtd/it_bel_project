@@ -5,7 +5,7 @@ from ..models.comment import Comment
 from ..models.news import News
 from ..serializers.comment import CommentSerializer
 from news.mixins import LikedMixin
-from news.permission import AuthorOrReadOnlyComments
+from news.permissions.AuthorOrReadOnlyComments import AuthorOrReadOnlyComments
 
 
 class CommentViewSet(LikedMixin, viewsets.ModelViewSet):

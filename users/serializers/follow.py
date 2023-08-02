@@ -8,7 +8,7 @@ class FollowSerializer(serializers.ModelSerializer):
     def validate(self, data: dict):
         if data.get('author') == data.get('follower'):
             raise serializers.ValidationError(
-                'You cannot subscribe on yourself.'
+                {'detail': 'You cannot subscribe on yourself'}
             )
         return super().validate(data)
 
