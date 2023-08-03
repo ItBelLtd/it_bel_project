@@ -1,4 +1,9 @@
+import random
+from datetime import timedelta
+
+from django.db.models import Count
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from rest_framework import filters, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
@@ -26,6 +31,34 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
         if not hasattr(user, 'author'):
             raise ValidationError({'detail': 'Only authors can create News'})
         return serializer.save(author=user.author)
+
+    @action(
+        methods=['GET', ],
+        detail=False,
+        url_path='popular',
+    )
+    def get_popular_news(self, request: HttpRequest):
+        """
+        Retrieve most popular news articles added in the last 7 days by
+        filtering on the added field.
+
+        Add a new field likes_total to each article using annotate() method.
+
+        Order queryset by likes_total in ascending order using order_by().
+
+        Select first 6 articles using slicing and randomize their order using
+        random.shuffle().
+        """
+        date = timezone.now().date() - timedelta(days=7)
+        news = News.objects.filter(
+            added__gte=date
+        ).annotate(
+            likes_total=Count('likes')
+        ).order_by(
+            'likes_total'
+        )[:6]
+        random.shuffle(news)
+        return Response(NewsSerializer(news, many=True).data)
 
     @action(
         methods=['GET', ],

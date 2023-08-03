@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from rest_framework import filters, viewsets
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
@@ -11,6 +12,7 @@ from ..serializers.follow import FollowSerializer
 from ..serializers.users import UserListSerializer
 from news.serializers.news import NewsSerializer
 from users.permissions.author import AuthorOwnerOrReadOnly
+from users.permissions.moderator import IsModerator
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
@@ -77,3 +79,32 @@ class AuthorViewSet(viewsets.ModelViewSet):
         followers = [i.follower for i in Follow.objects.filter(author=pk)]
         serializer = UserListSerializer(followers, many=True)
         return Response(serializer.data)
+
+    @action(
+        detail=False,
+        methods=['GET', ],
+        url_path='author_stats',
+        permission_classes=[IsModerator, ]
+    )
+    def registration_counts(self, request: HttpRequest):
+        today = timezone.now().date()
+        week_start = today - timezone.timedelta(days=today.weekday())
+        month_start = today.replace(day=1)
+
+        today_count = self.queryset.filter(
+            date_joined__gte=today
+        ).count()
+        week_count = self.queryset.filter(
+            date_joined__gte=week_start
+        ).count()
+        month_count = self.queryset.filter(
+            date_joined__gte=month_start
+        ).count()
+
+        data = {
+            'today': today_count,
+            'this_week': week_count,
+            'this_month': month_count,
+        }
+
+        return Response(data)
