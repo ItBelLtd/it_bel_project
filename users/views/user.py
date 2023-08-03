@@ -6,11 +6,11 @@ from rest_framework.response import Response
 
 from ..models.follow import Follow
 from ..models.user import User
-from ..serializers.follow import FollowSerializer
+from ..serializers.author import AuthorSerializer
 from ..serializers.profile import ProfileSerializer
 from ..serializers.users import (UserCreateSerializer, UserListSerializer,
                                  UserUpdateSerializer)
-from users.permissions.UserOwnerOrReadOnly import UserOwnerOrReadOnly
+from users.permissions.user import UserOwnerOrReadOnly
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -54,6 +54,8 @@ class UserViewSet(viewsets.ModelViewSet):
     )
     def user_following_list(self, request: HttpRequest, pk: int):
         user = get_object_or_404(User, user_id=pk)
-        following_authors = Follow.objects.filter(follower=user)
-        serializer = FollowSerializer(following_authors, many=True)
+        following_authors = []
+        for i in Follow.objects.filter(follower=user):
+            following_authors.append(i.author)
+        serializer = AuthorSerializer(following_authors, many=True)
         return Response(serializer.data)

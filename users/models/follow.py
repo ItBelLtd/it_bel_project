@@ -6,6 +6,10 @@ from users.models.user import User
 
 class Follow(models.Model):
     """Модель подписки на пользователей"""
+    follow_id = models.AutoField(
+        primary_key=True,
+        verbose_name="ID пользователя"
+    )
     follower = models.ForeignKey(
         User,
         related_name='follows',

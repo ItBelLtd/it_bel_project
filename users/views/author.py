@@ -8,8 +8,9 @@ from ..models.author import Author
 from ..models.follow import Follow
 from ..serializers.author import AuthorSerializer
 from ..serializers.follow import FollowSerializer
+from ..serializers.users import UserListSerializer
 from news.serializers.news import NewsSerializer
-from users.permissions.AuthorOwnerOrReadOnly import AuthorOwnerOrReadOnly
+from users.permissions.author import AuthorOwnerOrReadOnly
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
@@ -42,9 +43,9 @@ class AuthorViewSet(viewsets.ModelViewSet):
         url_path='follow',
     )
     def follow(self, request: HttpRequest, pk: int):
-        get_object_or_404(Author, author_id=pk)
+        author = get_object_or_404(Author, author_id=pk)
         data = {
-            'author': pk,
+            'author': author.author_id,
             'follower': self.request.user.user_id,
         }
         serializer = FollowSerializer(data=data)
@@ -58,9 +59,10 @@ class AuthorViewSet(viewsets.ModelViewSet):
         url_path='unfollow',
     )
     def unfollow(self, request: HttpRequest, pk: int):
+        author = get_object_or_404(Author, author_id=pk)
         follow = Follow.objects.filter(
-            follower=self.request.user.user_id,
-            author=pk
+            follower=self.request.user,
+            author=author
         )
         follow.delete()
         return Response({'detail': 'NO_CONTENT'}, status=204)
@@ -72,6 +74,6 @@ class AuthorViewSet(viewsets.ModelViewSet):
     )
     def author_follower_list(self, request: HttpRequest, pk: int):
         get_object_or_404(Author, author_id=pk)
-        followers = Follow.objects.filter(author=pk)
-        serializer = FollowSerializer(followers, many=True)
+        followers = [i.follower for i in Follow.objects.filter(author=pk)]
+        serializer = UserListSerializer(followers, many=True)
         return Response(serializer.data)
