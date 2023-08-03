@@ -13,9 +13,9 @@ from rest_framework.response import Response
 from ..models.news import News
 from ..serializers.news import NewsSerializer
 from news.mixins import LikedMixin
-from news.permission import AuthorOrReadOnlyNews
+from news.permissions.news import AuthorOrReadOnlyNews
 from users.models.user import User
-from users.permission import IsModerator
+from users.permissions.moderator import IsModerator
 
 
 class NewsViewSet(LikedMixin, viewsets.ModelViewSet):

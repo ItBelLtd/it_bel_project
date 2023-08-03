@@ -1,13 +1,16 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
 
+from ..models.follow import Follow
 from ..models.user import User
+from ..serializers.author import AuthorSerializer
 from ..serializers.profile import ProfileSerializer
 from ..serializers.users import (UserCreateSerializer, UserListSerializer,
                                  UserUpdateSerializer)
-from users.permission import UserOwnerOrReadOnly
+from users.permissions.user import UserOwnerOrReadOnly
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -43,3 +46,16 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = ProfileSerializer(request.user)
         serializer.destroy()
         return Response({'detail': 'Success'}, status=204)
+
+    @action(
+        methods=['GET', ],
+        detail=True,
+        url_path='following',
+    )
+    def user_following_list(self, request: HttpRequest, pk: int):
+        user = get_object_or_404(User, user_id=pk)
+        following_authors = []
+        for i in Follow.objects.filter(follower=user):
+            following_authors.append(i.author)
+        serializer = AuthorSerializer(following_authors, many=True)
+        return Response(serializer.data)

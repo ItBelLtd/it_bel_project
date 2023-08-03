@@ -19,7 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = Env(DEBUG=(bool, False))
 Env.read_env(str(BASE_DIR / ".env"))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -83,18 +82,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "it_bel_project.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
 if env('DOCKER', default=False):
     from .db_config import DOCKER_DB
+
     DATABASES = DOCKER_DB
 else:
     from .db_config import LOCAL_DB
-    DATABASES = LOCAL_DB
 
+    DATABASES = LOCAL_DB
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -114,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -126,14 +124,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
 
 STATIC_ROOT = 'static'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -163,3 +159,4 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Epic',
     'VERSION': '1.0.0',
 }
+LANGUAGE_CODE = "ru-ru"
