@@ -1,19 +1,21 @@
-from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils import timezone
+from users.models.user import User
 
 
 class Like(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
-        related_name='likes'
+        related_name='likes',
+        verbose_name='Пользователь',
     )
     content_type = models.ForeignKey(
         ContentType,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name='Тип контента',
     )
     added = models.DateTimeField(
         verbose_name='Время добавления',
