@@ -15,7 +15,7 @@ class News(models.Model):
         help_text="Уникальный идентификатор новости",
     )
     title = models.CharField(
-        max_length=50,
+        max_length=70,
         blank=False,
         null=False,
         verbose_name="Заголовок новости",
@@ -30,7 +30,7 @@ class News(models.Model):
     description = models.TextField(
         blank=True,
         null=True,
-        max_length=25,
+        max_length=60,
         verbose_name="Описание новости"
     )
     content = models.TextField(

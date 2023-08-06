@@ -7,32 +7,16 @@ from users.models.user import User
 
 
 class FollowTestCase(APITestCase):
+    fixtures = [r'fixtures\follows.json']
 
     def setUp(self):
-        self.user_for_author = User.objects.create_superuser(
-            email="test@gmail.com", password="testtest123")
-        self.user_for_follower = User.objects.create_superuser(
-            email="test2@gmail.com", password="testtest123")
-
-        self.client_for_author = APIClient()
+        self.user_for_author = User.objects.get(user_id=1)
+        self.user_for_follower = User.objects.get(user_id=2)
+        self.author = Author.objects.get(user_id=1)
         self.client_for_follower = APIClient()
-
-        self.client_for_author.force_authenticate(
-            user=self.user_for_author
-        )
-        self.client_for_follower.force_authenticate(
-            user=self.user_for_follower
-        )
-
-        self.author = Author.objects.create(
-            author_id=1,
-            user=self.user_for_author,
-            name="Test",
-            surname="Testovich",
-            age=18,
-            email="test@gmail.com",
-            is_active=True
-        )
+        self.client_for_author = APIClient()
+        self.client_for_follower.force_authenticate(user=self.user_for_author)
+        self.client_for_author.force_authenticate(user=self.user_for_follower)
 
     def test_followers_get(self):
         url = reverse("authors-detail", args=[self.author.pk]) + 'followers/'

@@ -7,21 +7,13 @@ from users.models.user import User
 
 
 class AuthorsTestCase(APITestCase):
+    fixtures = [r'fixtures\authors.json']
+
     def setUp(self):
-        self.user = User.objects.create_superuser(
-            email="test@gmail.com", password="testtest123"
-        )
+        self.user = User.objects.get(user_id=1)
+        self.author = Author.objects.get(user_id=1)
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
-        self.author = Author.objects.create(
-            author_id=1,
-            user=self.user,
-            name="Test",
-            surname="Testovich",
-            age=18,
-            email="test@gmail.com",
-            is_active=True
-        )
 
     def test_authors_get(self):
         url = reverse('authors-list')

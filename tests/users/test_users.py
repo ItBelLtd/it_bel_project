@@ -6,11 +6,10 @@ from users.models.user import User
 
 
 class UserTestCase(APITestCase):
+    fixtures = [r'fixtures\users.json']
 
     def setUp(self):
-        self.user = User.objects.create_superuser(
-            email="test@gmail.com", password="testtest123")
-
+        self.user = User.objects.get(user_id=1)
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
 
