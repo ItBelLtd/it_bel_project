@@ -160,3 +160,7 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
 }
 LANGUAGE_CODE = "ru-ru"
+
+FIXTURE_DIRS = [
+    'fixtures',
+]
