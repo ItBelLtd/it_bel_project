@@ -7,7 +7,7 @@ from users.models.author import Author
 
 
 class NewsTestCase(APITestCase):
-    fixtures = [r'fixtures\news.json']
+    fixtures = ['fixtures/news.json']
 
     def setUp(self):
         self.author = Author.objects.get(author_id=1)

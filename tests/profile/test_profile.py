@@ -6,7 +6,7 @@ from users.models.user import User
 
 
 class ProfileTestCase(APITestCase):
-    fixtures = [r'fixtures\users.json']
+    fixtures = ['fixtures/users.json']
 
     def setUp(self):
         self.user = User.objects.get(user_id=1)
