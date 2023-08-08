@@ -7,7 +7,7 @@ from users.models.user import User
 
 
 class AuthorsTestCase(APITestCase):
-    fixtures = [r'fixtures\authors.json']
+    fixtures = ['fixtures/authors.json']
 
     def setUp(self):
         self.user = User.objects.get(user_id=1)

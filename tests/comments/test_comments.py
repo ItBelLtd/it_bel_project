@@ -8,7 +8,7 @@ from users.models.author import Author
 
 
 class CommentTestCase(APITestCase):
-    fixtures = [r'fixtures\comments.json']
+    fixtures = ['fixtures/comments.json']
 
     def setUp(self):
         self.author = Author.objects.get(author_id=1)
