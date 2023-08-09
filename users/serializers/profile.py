@@ -17,7 +17,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         return serializer.data
 
     def get_as_author(self, user: User):
-        author = Author.objects.filter(email=user.email).first()
+        author = Author.objects.filter(user=user).first()
         if not author:
             return None
 

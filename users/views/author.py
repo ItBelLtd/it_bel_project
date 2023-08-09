@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from rest_framework import filters, viewsets
+from rest_framework import filters, mixins, viewsets
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
@@ -15,18 +15,19 @@ from users.permissions.author import AuthorOwnerOrReadOnly
 from users.permissions.moderator import IsModerator
 
 
-class AuthorViewSet(viewsets.ModelViewSet):
+# We remove the inherited CreateModelMixin
+# and DestroyModelMixin from the ModelViewSet,
+# since these are methods for the user
+# Check rest_framework/viewsets.py
+class AuthorViewSet(mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = [AuthorOwnerOrReadOnly]
     filter_backends = [filters.SearchFilter]
     search_fields = ['surname', 'name']
-
-    def perform_create(self, serializer: AuthorSerializer):
-        return serializer.save(
-            email=self.request.user.email,
-            user=self.request.user
-        )
 
     @action(
         methods=['GET', ],

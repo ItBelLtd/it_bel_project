@@ -16,10 +16,25 @@ from users.permissions.user import UserOwnerOrReadOnly
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     permission_classes = [UserOwnerOrReadOnly, ]
+    serializer_class = UserCreateSerializer
+
+    def create(self, request: HttpRequest, ):
+        author_data = request.data.pop('author')
+        if author_data:
+            user_serializer = UserCreateSerializer(data=request.data)
+            user_serializer.is_valid(raise_exception=True)
+            user = user_serializer.save()
+
+            author_serializer = AuthorSerializer(data=author_data)
+            author_serializer.is_valid(raise_exception=True)
+            author_serializer.save(user=user)
+            return Response(author_serializer.data, status=201)
+        user_serializer = UserCreateSerializer(data=request.data)
+        user_serializer.is_valid(raise_exception=True)
+        user_serializer.save()
+        return Response(user_serializer.data, status=201)
 
     def get_serializer_class(self):
-        if self.action == 'create':
-            return UserCreateSerializer
         if self.action in ('update', 'partial_update'):
             return UserUpdateSerializer
         return UserListSerializer
