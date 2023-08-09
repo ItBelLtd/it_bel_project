@@ -19,16 +19,16 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserCreateSerializer
 
     def create(self, request: HttpRequest, ):
-        if request.data['author']:
-            author_data = request.data.pop('author')
+        author_data = request.data.pop('author')
+        if author_data:
             user_serializer = UserCreateSerializer(data=request.data)
-            author_serializer = AuthorSerializer(data=author_data)
             user_serializer.is_valid(raise_exception=True)
-            author_serializer.is_valid(raise_exception=True)
             user = user_serializer.save()
+
+            author_serializer = AuthorSerializer(data=author_data)
+            author_serializer.is_valid(raise_exception=True)
             author_serializer.save(user=user)
             return Response(author_serializer.data, status=201)
-        request.data.pop('author')
         user_serializer = UserCreateSerializer(data=request.data)
         user_serializer.is_valid(raise_exception=True)
         user_serializer.save()
