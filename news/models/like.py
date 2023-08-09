@@ -6,11 +6,15 @@ from django.utils import timezone
 
 
 class Like(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE,
-                             related_name='likes')
-    content_type = models.ForeignKey(ContentType,
-                                     on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='likes'
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE
+    )
     added = models.DateTimeField(
         verbose_name='Время добавления',
         default=timezone.now,

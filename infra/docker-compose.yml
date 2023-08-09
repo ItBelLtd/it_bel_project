@@ -19,6 +19,7 @@ services:
       - static_dir:/app/static/
     depends_on:
       - db
+      - redis
     command: |
       bash -c "python3 manage.py makemigrations;
         python3 manage.py migrate;
@@ -39,6 +40,10 @@ services:
 
     depends_on:
       - back
+  redis:
+    container_name: redis
+    image: redis:7.0.11-alpine
+    restart: always
 
 volumes:
   static_dir:
