@@ -2,15 +2,17 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from ..models.user import User
+from users.serializers.author import AuthorSerializer
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     date_joined = serializers.CharField(read_only=True)
+    author = AuthorSerializer(required=False)
 
     class Meta:
         model = User
-        fields = ['user_id', 'username', 'email', 'date_joined', 'password']
+        fields = ["username", "email", "password", "date_joined", "author", ]
 
     def validate_password(self, password):
         validate_password(password)
