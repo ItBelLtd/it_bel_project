@@ -12,7 +12,7 @@ class UserViewSet(
     UserMixin
 ):
     queryset = User.objects.all()
-    permission_classes = [UserOwnerOrReadOnly, ]
+    permission_classes = [UserOwnerOrReadOnly]
 
     def get_serializer_class(self):
         if self.action == 'create':
