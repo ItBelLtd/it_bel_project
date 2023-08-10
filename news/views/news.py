@@ -17,7 +17,10 @@ from users.models.user import User
 from users.permissions.moderator import IsModerator
 
 
-class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
+class NewsViewSet(
+    LikedMixin,
+    viewsets.ModelViewSet,
+):
 
     queryset = News.objects.all()
     serializer_class = NewsSerializer
