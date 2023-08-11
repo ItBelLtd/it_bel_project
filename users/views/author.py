@@ -1,4 +1,4 @@
-from mixins import AuthorMixin
+from mixins.author import AuthorMixin
 from rest_framework import filters, viewsets
 
 from ..models.author import Author

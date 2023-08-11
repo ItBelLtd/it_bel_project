@@ -6,32 +6,11 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from models.news import News
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
 
-from .serializers.news import NewsSerializer
-from news import services
+from ..serializers.news import NewsSerializer
 from users.permission import IsModerator
-
-
-class LikedMixin:
-
-    @action(detail=True,
-            methods=['POST'],
-            permission_classes=[IsAuthenticated]
-            )
-    def like(self, request, pk=None, news_id=None):
-        services.add_like(obj=self.get_object(), user=request.user)
-        return Response({'status': 'ok'})
-
-    @action(detail=True,
-            methods=['POST'],
-            permission_classes=[IsAuthenticated]
-            )
-    def unlike(self, request, pk=None, news_id=None):
-        services.remove_like(obj=self.get_object(), user=request.user)
-        return Response({'status': 'ok'})
 
 
 class NewsMixin:

@@ -1,4 +1,4 @@
-from mixins import UserMixin
+from mixins.user import UserMixin
 from rest_framework import viewsets
 
 from ..models.user import User
