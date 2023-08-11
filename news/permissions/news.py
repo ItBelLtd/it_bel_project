@@ -16,8 +16,10 @@ class AuthorOrReadOnlyNews(permissions.BasePermission):
     def has_object_permission(
             self, request: HttpRequest, view, obj: Comment | News
     ):
+        if request.user.is_superuser:
+            return True
+        if request.method in permissions.SAFE_METHODS:
+            return True
         return (
-            obj.author == request.user.author
-            or request.method in permissions.SAFE_METHODS
-            or request.user.is_superuser
+            request.user.is_authenticated and obj.author == request.user.author
         )

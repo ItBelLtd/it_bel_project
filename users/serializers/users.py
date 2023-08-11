@@ -2,6 +2,7 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from ..models.user import User
+from ..models.author import Author
 from users.serializers.author import AuthorSerializer
 
 
@@ -20,10 +21,17 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data: dict):
         password = validated_data.pop('password')
+        author_data = validated_data.pop('author', None)
+
         user: User = super().create(validated_data)
+
         try:
             user.set_password(password)
             user.save()
+
+            if author_data is not None:
+                Author.objects.create(user=user, **author_data)
+
             return user
         except serializers.ValidationError as exc:
             user.delete()

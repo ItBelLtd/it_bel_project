@@ -34,6 +34,9 @@ class UserTestCase(APITestCase):
             "username": "test username",
             "author":
                 {
+                    "name": "name",
+                    "surname": "surname",
+                    "age": 1
                 }
         }
         response = self.client.post(url, post_data, format='json')
