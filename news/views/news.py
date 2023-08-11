@@ -11,8 +11,8 @@ from rest_framework.response import Response
 
 from ..models.news import News
 from ..serializers.news import NewsSerializer
-from news.mixins import LikedMixin
-from news.permissions.news import AuthorOrReadOnlyNews
+from ..mixins.like import LikedMixin
+from ..permissions.news import AuthorOrReadOnlyNews
 from users.models.user import User
 from users.permissions.moderator import IsModerator
 
