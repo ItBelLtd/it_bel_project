@@ -1,4 +1,3 @@
-import random
 from datetime import timedelta
 
 from django.db.models import Count
@@ -46,8 +45,7 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
 
         Order queryset by likes_total in ascending order using order_by().
 
-        Select first 6 articles using slicing and randomize their order using
-        random.shuffle().
+        Select first 6 articles using slicing.
         """
         date = timezone.now().date() - timedelta(days=7)
         news = News.objects.filter(
@@ -56,8 +54,7 @@ class NewsViewSet(LikedMixin, viewsets.ModelViewSet):
             likes_total=Count('likes')
         ).order_by(
             'likes_total'
-        )[:6]
-        random.shuffle(news)
+        )
         return Response(NewsSerializer(news, many=True).data)
 
     @action(
