@@ -12,7 +12,7 @@ from ..serializers.author import AuthorSerializer
 from ..serializers.profile import ProfileSerializer
 from users.permissions.user import UserOwnerOrReadOnly
 from users.services import (get_user_id_from_cache, send_email_reset_password,
-                            send_email_verification)
+                            send_email_verification, validate_email)
 
 
 class UserMixin:
@@ -20,7 +20,7 @@ class UserMixin:
         methods=['GET'],
         url_path='profile',
         detail=False,
-        permission_classes=[UserOwnerOrReadOnly, IsAuthenticated, ],
+        permission_classes=[UserOwnerOrReadOnly, IsAuthenticated]
     )
     def profile(self, request: HttpRequest):
         serializer = ProfileSerializer(request.user)
@@ -104,7 +104,7 @@ class EmailConfirmationPasswordRest:
                 'Email not found',
                 status=status.HTTP_400_BAD_REQUEST
             )
-        user_email = self.validate_email(email=request.data.get('email', ''))
+        user_email = validate_email(email=request.data.get('email', ''))
         user: User = self.get_queryset().filter(email=user_email).first()
         if not user:
             return Response(
@@ -127,7 +127,7 @@ class EmailConfirmationPasswordRest:
         url_name='reset-password',
     )
     def reset_password(self, request: Request):
-        user_email = self.validate_email(email=request.data.get('email', ''))
+        user_email = validate_email(email=request.data.get('email', ''))
         if not user_email:
             return Response(
                 'Email not found',

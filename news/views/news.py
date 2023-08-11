@@ -11,16 +11,13 @@ from rest_framework.response import Response
 
 from ..models.news import News
 from ..serializers.news import NewsSerializer
-from ..mixins import LikedMixin
+from ..mixins.like import LikedMixin
 from ..permissions.news import AuthorOrReadOnlyNews
 from users.models.user import User
 from users.permissions.moderator import IsModerator
 
 
-class NewsViewSet(
-    LikedMixin,
-    viewsets.ModelViewSet,
-):
+class NewsViewSet(LikedMixin, viewsets.ModelViewSet,):
 
     queryset = News.objects.all()
     serializer_class = NewsSerializer
