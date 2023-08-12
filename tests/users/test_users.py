@@ -6,11 +6,10 @@ from users.models.user import User
 
 
 class UserTestCase(APITestCase):
+    fixtures = ['fixtures/users.json']
 
     def setUp(self):
-        self.user = User.objects.create_superuser(
-            email="test@gmail.com", password="testtest123")
-
+        self.user = User.objects.get(user_id=1)
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
 
@@ -32,9 +31,14 @@ class UserTestCase(APITestCase):
         post_data = {
             "email": "test1@gmail.com",
             "password": "string123",
-            "username": "test username"
+            "username": "test username",
+            "author":
+                {
+                    "name": "name",
+                    "surname": "surname",
+                    "age": 1
+                }
         }
-
         response = self.client.post(url, post_data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

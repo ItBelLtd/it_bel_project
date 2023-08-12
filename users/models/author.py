@@ -36,13 +36,6 @@ class Author(models.Model):
         blank=False,
         help_text="Возраст"
     )
-    email = models.EmailField(
-        unique=True,
-        blank=False,
-        null=False,
-        verbose_name="Почта автора",
-        help_text="Email"
-    )
     date_joined = models.DateTimeField(
         verbose_name="Дата регистрации",
         default=timezone.now,

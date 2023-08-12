@@ -1,0 +1,933 @@
+[
+  {
+    "model": "news.like",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "content_type": 3,
+      "added": "2023-08-05T15:03:25.933Z",
+      "object_id": 5
+    }
+  },
+  {
+    "model": "news.like",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "content_type": 3,
+      "added": "2023-08-05T15:03:29.540Z",
+      "object_id": 6
+    }
+  },
+  {
+    "model": "news.like",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "content_type": 3,
+      "added": "2023-08-05T15:03:30.575Z",
+      "object_id": 7
+    }
+  },
+  {
+    "model": "news.like",
+    "pk": 4,
+    "fields": {
+      "user": 1,
+      "content_type": 3,
+      "added": "2023-08-05T15:03:32.247Z",
+      "object_id": 1
+    }
+  },
+  {
+    "model": "news.like",
+    "pk": 5,
+    "fields": {
+      "user": 1,
+      "content_type": 3,
+      "added": "2023-08-05T15:03:34.799Z",
+      "object_id": 9
+    }
+  },
+  {
+    "model": "news.like",
+    "pk": 6,
+    "fields": {
+      "user": 1,
+      "content_type": 3,
+      "added": "2023-08-05T15:03:36.881Z",
+      "object_id": 10
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 1,
+    "fields": {
+      "title": "Apple: инновационный iPhone",
+      "author": 1,
+      "description": "Новый iPhone",
+      "content": "Apple радует своих поклонников новым смартфоном iPhone, который обладает улучшенной камерой, позволяющей делать еще более качественные фотографии, а также новым процессором, который повышает производительность и эффективность работы устройства.",
+      "cover": "",
+      "added": "2023-08-05T14:50:14.989Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 2,
+    "fields": {
+      "title": "Google: автономное вождение",
+      "author": 1,
+      "description": "Автономное вождение",
+      "content": "Google переворачивает сферу автомобильной индустрии, представляя свою собственную систему автономного вождения. Технология позволяет автомобилю самостоятельно управляться и обеспечивает безопасность и удобство для пассажиров.",
+      "cover": "",
+      "added": "2023-08-05T14:51:03.278Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 3,
+    "fields": {
+      "title": "Facebook: видеозвонки на платформе",
+      "author": 1,
+      "description": "Facebook",
+      "content": "Facebook радует своих пользователей возможностью прямых видеозвонков прямо через свою платформу. Это отличная новая функция, которая позволяет взаимодействовать и общаться с друзьями и близкими на новом уровне.",
+      "cover": "",
+      "added": "2023-08-05T14:51:34.815Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 4,
+    "fields": {
+      "title": "Amazon: дроны для доставки",
+      "author": 1,
+      "description": "Дроны Amazon",
+      "content": "Amazon произвела революцию в сферу доставки товаров, работая над разработкой дронов, которые смогут доставлять товары в местности с ограниченной инфраструктурой. Это позволит сделать доставку быстрее и более эффективной.",
+      "cover": "",
+      "added": "2023-08-05T14:52:27.365Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 5,
+    "fields": {
+      "title": "IBM: суперкомпьютер и искусственный интеллект",
+      "author": 1,
+      "description": "IBM",
+      "content": "IBM радует профессионалов в области искусственного интеллекта новым суперкомпьютером, способным решать сложные задачи в этой области. Это открывает новые горизонты для исследований и разработок в области ИИ",
+      "cover": "",
+      "added": "2023-08-05T14:53:00.446Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 6,
+    "fields": {
+      "title": "Tesla: улучшенный дальнобойный запас",
+      "author": 1,
+      "description": "Tesla",
+      "content": "Tesla радует любителей электромобилей новой моделью, которая обладает улучшенным дальнобойным запасом. Это позволит пользователям совершать более длительные поездки без необходимости частой подзарядки.",
+      "cover": "",
+      "added": "2023-08-05T14:53:26.192Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 7,
+    "fields": {
+      "title": "Microsoft: новая Windows",
+      "author": 1,
+      "description": "Microsoft",
+      "content": "Microsoft представляет новую операционную систему Windows, которая содержит инновационные функции и улучшенную систему безопасности. Это обеспечивает более удобную и защищенную работу с компьютером для пользователей.",
+      "cover": "",
+      "added": "2023-08-05T14:54:17.000Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 8,
+    "fields": {
+      "title": "Здоровье и искусственный интеллект",
+      "author": 1,
+      "description": "Здоровье",
+      "content": "Было разработано новое приложение для здоровья и фитнеса, которое использует технологии искусственного интеллекта. Это помогает пользователям мониторить свое здоровье и улучшать физическую форму с помощью персонализированных рекомендаций.",
+      "cover": "",
+      "added": "2023-08-05T14:55:03.856Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 9,
+    "fields": {
+      "title": "Технология, позволяющая имитировать касания",
+      "author": 1,
+      "description": "Новости от Chat GPT",
+      "content": "Была разработана новая технология виртуальной реальности, которая позволяет пользователям имитировать осязательные ощущения. Это открывает новые возможности для развлечений, обучения и медицинской сферы.",
+      "cover": "",
+      "added": "2023-08-05T14:57:28.488Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.news",
+    "pk": 10,
+    "fields": {
+      "title": "Twitter теперь Х...",
+      "author": 1,
+      "description": "Twitter ребрендинг",
+      "content": "Twitter предпринимает шаги для повышения безопасности платформы, внедряя новые меры, которые помогают бороться с фейковыми новостями и кибератаками. Это улучшает доверие пользователей и делает платформу более надежной.",
+      "cover": "",
+      "added": "2023-08-05T14:58:37.982Z",
+      "is_moderated": false
+    }
+  },
+  {
+    "model": "news.comment",
+    "pk": 2,
+    "fields": {
+      "text": "Братан, хорош, давай, давай, вперёд! Контент в кайф, можно ещё? Вообще красавчик! Можно вот этого вот почаще? Давай пока!",
+      "added": "2023-08-05T15:01:19.087Z",
+      "news": 2,
+      "author": 1,
+      "as_author": false
+    }
+  },
+  {
+    "model": "news.comment",
+    "pk": 1,
+    "fields": {
+      "text": "Опять Аппле выпускает новый iPhone, сколько можно уже этих улучшений?",
+      "added": "2023-08-05T15:01:48.733Z",
+      "news": 1,
+      "author": 1,
+      "as_author": false
+    }
+  },
+  {
+    "model": "news.comment",
+    "pk": 3,
+    "fields": {
+      "text": "Осязательные ощущения в виртуальной реальности звучат невероятно! Как же я хочу попробовать!",
+      "added": "2023-08-05T15:02:29.612Z",
+      "news": 9,
+      "author": 1,
+      "as_author": false
+    }
+  },
+  {
+    "model": "news.comment",
+    "pk": 4,
+    "fields": {
+      "text": "Осязательные ощущения в виртуальной реальности звучат невероятно! Как же я хочу попробовать!",
+      "added": "2023-08-05T15:02:30.330Z",
+      "news": 9,
+      "author": 1,
+      "as_author": false
+    }
+  },
+  {
+    "model": "news.comment",
+    "pk": 5,
+    "fields": {
+      "text": "Кек лол XDDDD",
+      "added": "2023-08-05T15:02:45.784Z",
+      "news": 5,
+      "author": 1,
+      "as_author": false
+    }
+  },
+  {
+    "model": "news.comment",
+    "pk": 6,
+    "fields": {
+      "text": "Кринж",
+      "added": "2023-08-05T15:03:08.455Z",
+      "news": 7,
+      "author": 1,
+      "as_author": false
+    }
+  },
+  {
+    "model": "news.comment",
+    "pk": 7,
+    "fields": {
+      "text": "Автономное вождение? У меня крадут работу после it!!!!!!!!",
+      "added": "2023-08-05T15:05:45.493Z",
+      "news": 2,
+      "author": 2,
+      "as_author": false
+    }
+  },
+  {
+    "model": "news.comment",
+    "pk": 8,
+    "fields": {
+      "text": "Новый Tesla с большим запасом? А вот цена еще больше вырастет",
+      "added": "2023-08-05T15:06:31.731Z",
+      "news": 6,
+      "author": 2,
+      "as_author": false
+    }
+  },
+  {
+    "model": "news.comment",
+    "pk": 9,
+    "fields": {
+      "text": "Осязательные ощущения в виртуальной реальности? Зумеры очень слабохарактерны...",
+      "added": "2023-08-05T15:07:09.151Z",
+      "news": 9,
+      "author": 2,
+      "as_author": false
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$9LPZMonuzUmQTxOP4LlUlY$c5trASeuVzhjGidYiaXcrcQ4CHBwYA8fP8VtDB7NQGs=",
+      "last_login": "2023-08-05T14:42:53.634Z",
+      "username": "test_user",
+      "email": "test@user.com",
+      "date_joined": "2023-08-05T14:41:31.980Z",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "is_moderator": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$hmPalomJgRV5DP4cxZ3hMm$dSO5MKppx2nr8YCZDctUFHzavMv7wWt8Gshq0ZveVlk=",
+      "last_login": "2023-08-05T15:04:06.578Z",
+      "username": "test_user_2",
+      "email": "test_2@user.com",
+      "date_joined": "2023-08-05T14:42:25.723Z",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "is_moderator": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.author",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "name": "Test",
+      "surname": "Testovich",
+      "age": 35,
+      "date_joined": "2023-08-05T14:43:31.705Z",
+      "is_active": false
+    }
+  },
+  {
+    "model": "users.follow",
+    "pk": 1,
+    "fields": {
+      "follower": 2,
+      "author": 1
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add Комментарий",
+      "content_type": 1,
+      "codename": "add_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change Комментарий",
+      "content_type": 1,
+      "codename": "change_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete Комментарий",
+      "content_type": 1,
+      "codename": "delete_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view Комментарий",
+      "content_type": 1,
+      "codename": "view_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add like",
+      "content_type": 2,
+      "codename": "add_like"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change like",
+      "content_type": 2,
+      "codename": "change_like"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete like",
+      "content_type": 2,
+      "codename": "delete_like"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view like",
+      "content_type": 2,
+      "codename": "view_like"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add Новость",
+      "content_type": 3,
+      "codename": "add_news"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change Новость",
+      "content_type": 3,
+      "codename": "change_news"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete Новость",
+      "content_type": 3,
+      "codename": "delete_news"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view Новость",
+      "content_type": 3,
+      "codename": "view_news"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add Пользователь",
+      "content_type": 4,
+      "codename": "add_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change Пользователь",
+      "content_type": 4,
+      "codename": "change_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete Пользователь",
+      "content_type": 4,
+      "codename": "delete_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view Пользователь",
+      "content_type": 4,
+      "codename": "view_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add Автор",
+      "content_type": 5,
+      "codename": "add_author"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change Автор",
+      "content_type": 5,
+      "codename": "change_author"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete Автор",
+      "content_type": 5,
+      "codename": "delete_author"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view Автор",
+      "content_type": 5,
+      "codename": "view_author"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add Подписка",
+      "content_type": 6,
+      "codename": "add_follow"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change Подписка",
+      "content_type": 6,
+      "codename": "change_follow"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete Подписка",
+      "content_type": 6,
+      "codename": "delete_follow"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view Подписка",
+      "content_type": 6,
+      "codename": "view_follow"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 7,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 7,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 7,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 7,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 8,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 8,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 8,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 8,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 9,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 9,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 9,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 9,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 10,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 10,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 10,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 10,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 11,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 11,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 11,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 11,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+      "name": "Can add Token",
+      "content_type": 12,
+      "codename": "add_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+      "name": "Can change Token",
+      "content_type": 12,
+      "codename": "change_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+      "name": "Can delete Token",
+      "content_type": 12,
+      "codename": "delete_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+      "name": "Can view Token",
+      "content_type": 12,
+      "codename": "view_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+      "name": "Can add token",
+      "content_type": 13,
+      "codename": "add_tokenproxy"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+      "name": "Can change token",
+      "content_type": 13,
+      "codename": "change_tokenproxy"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+      "name": "Can delete token",
+      "content_type": 13,
+      "codename": "delete_tokenproxy"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+      "name": "Can view token",
+      "content_type": 13,
+      "codename": "view_tokenproxy"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+      "app_label": "news",
+      "model": "comment"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+      "app_label": "news",
+      "model": "like"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+      "app_label": "news",
+      "model": "news"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+      "app_label": "users",
+      "model": "user"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+      "app_label": "users",
+      "model": "author"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+      "app_label": "users",
+      "model": "follow"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+      "app_label": "auth",
+      "model": "permission"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+      "app_label": "auth",
+      "model": "group"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+      "app_label": "sessions",
+      "model": "session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+      "app_label": "authtoken",
+      "model": "token"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+      "app_label": "authtoken",
+      "model": "tokenproxy"
+    }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "80c25d0130548715599f7a6409f6e866fe0f8d31",
+    "fields": {
+      "user": 1,
+      "created": "2023-08-05T14:42:53.631Z"
+    }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "b58f088ee1674676149afe15fac9d68eb72dd737",
+    "fields": {
+      "user": 2,
+      "created": "2023-08-05T15:04:06.569Z"
+    }
+  }
+]

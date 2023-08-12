@@ -5,43 +5,17 @@ from rest_framework.test import APIClient, APITestCase
 from news.models.comment import Comment
 from news.models.news import News
 from users.models.author import Author
-from users.models.user import User
 
 
 class CommentTestCase(APITestCase):
+    fixtures = ['fixtures/comments.json']
 
     def setUp(self):
-        self.user = User.objects.create_superuser(
-            email="test@gmail.com", password="testtest123")
-
+        self.author = Author.objects.get(author_id=1)
         self.client = APIClient()
-        self.client.force_authenticate(user=self.user)
-
-        self.author = Author.objects.create(
-            author_id=1,
-            user=self.user,
-            name="Test",
-            surname="Testovich",
-            age=18,
-            email="test@gmail.com",
-            is_active=True
-        )
-
-        self.news = News.objects.create(
-            news_id=1,
-            title="test title",
-            author=self.author,
-            description="Testing",
-            content="Test content",
-            is_moderated=True
-        )
-
-        self.comment = Comment.objects.create(
-            comment_id=1,
-            text='test text',
-            news=self.news,
-            author=self.user
-        )
+        self.client.force_authenticate(user=self.author.user)
+        self.news = News.objects.get(news_id=1)
+        self.comment = Comment.objects.get(comment_id=1)
 
     def test_comment_get(self):
         url = reverse('comments-list', args=[self.news.pk])

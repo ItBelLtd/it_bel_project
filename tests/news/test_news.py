@@ -4,36 +4,16 @@ from rest_framework.test import APIClient, APITestCase
 
 from news.models.news import News
 from users.models.author import Author
-from users.models.user import User
 
 
 class NewsTestCase(APITestCase):
+    fixtures = ['fixtures/news.json']
 
     def setUp(self):
-        self.user = User.objects.create_superuser(
-            email="test@gmail.com", password="testtest123")
-
+        self.author = Author.objects.get(author_id=1)
         self.client = APIClient()
-        self.client.force_authenticate(user=self.user)
-
-        self.author = Author.objects.create(
-            author_id=1,
-            user=self.user,
-            name="Test",
-            surname="Testovich",
-            age=18,
-            email="test@gmail.com",
-            is_active=True
-        )
-
-        self.news = News.objects.create(
-            news_id=1,
-            title="test title",
-            author=self.author,
-            description="Testing",
-            content="Test content",
-            is_moderated=True
-        )
+        self.client.force_authenticate(user=self.author.user)
+        self.news = News.objects.get(news_id=1)
 
     def test_news_get(self):
         url = reverse("news-list")
