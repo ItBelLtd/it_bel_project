@@ -1,16 +1,12 @@
-
 from mixins.like import LikedMixin
 from mixins.news import NewsMixin
-
+from permissions.news import AuthorOrReadOnlyNews
 from rest_framework import filters, viewsets
 from rest_framework.exceptions import ValidationError
 
 from ..models.news import News
 from ..serializers.news import NewsSerializer
-
-from news.permission import AuthorOrReadOnlyNews
 from users.models.user import User
-
 
 
 class NewsViewSet(
