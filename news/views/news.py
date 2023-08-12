@@ -16,7 +16,6 @@ from ..permissions.news import AuthorOrReadOnlyNews
 from users.models.user import User
 from users.permissions.moderator import IsModerator
 
-
 class NewsViewSet(
     LikedMixin,
     viewsets.ModelViewSet,
