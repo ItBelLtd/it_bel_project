@@ -6,6 +6,8 @@ from ..serializers.users import (UserCreateSerializer, UserListSerializer,
                                  UserUpdateSerializer)
 from users.permissions.user import UserOwnerOrReadOnly
 
+import json
+
 
 class UserViewSet(
     viewsets.ModelViewSet,
