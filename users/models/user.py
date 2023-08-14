@@ -40,7 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     is_active = models.BooleanField(
         verbose_name="Активный",
-        default=False
+        default=True
     )
     is_moderator = models.BooleanField(
         verbose_name="Модератор",
