@@ -1,6 +1,6 @@
-from mixins.user import UserMixin
 from rest_framework import viewsets
 
+from ..mixins.user import UserMixin
 from ..models.user import User
 from ..serializers.users import (UserCreateSerializer, UserListSerializer,
                                  UserUpdateSerializer)
