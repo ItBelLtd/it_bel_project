@@ -11,10 +11,11 @@ from rest_framework.response import Response
 
 from ..models.news import News
 from ..serializers.news import NewsSerializer
-from ..mixins.like import LikedMixin
+from ..mixins import LikedMixin
 from ..permissions.news import AuthorOrReadOnlyNews
 from users.models.user import User
 from users.permissions.moderator import IsModerator
+
 
 class NewsViewSet(
     LikedMixin,
