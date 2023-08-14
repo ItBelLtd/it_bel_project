@@ -33,6 +33,10 @@ class Comment(models.Model):
         null=True,
         blank=True,
     )
+    as_author = models.BooleanField(
+        verbose_name='Комментарий от автора',
+        default=False,
+    )
     likes = GenericRelation(Like)
 
     def __str__(self) -> str:
