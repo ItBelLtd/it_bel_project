@@ -1,51 +1,22 @@
-from django.shortcuts import get_object_or_404
-from django.utils import timezone
-from rest_framework.decorators import action
-from rest_framework.request import HttpRequest
-from rest_framework.response import Response
+from mixins.author import AuthorMixin
+from rest_framework import filters, mixins, viewsets
 
 from ..models.author import Author
-from news.serializers.news import NewsSerializer
-from users.permission import IsModerator
+from ..serializers.author import AuthorSerializer
+from users.permissions.author import AuthorOwnerOrReadOnly
 
 
-class AuthorMixin:
-    @action(
-        methods=['GET', ],
-        detail=True,
-        url_path='news',
-    )
-    def get_author_news(self, request: HttpRequest, pk: int):
-        author = get_object_or_404(Author, author_id=pk)
-        news = author.news.all()
-        serializer = NewsSerializer(news, many=True)
-        return Response(serializer.data)
-
-    @action(
-        detail=False,
-        methods=['GET', ],
-        url_path='author_stats',
-        permission_classes=[IsModerator, ]
-    )
-    def registration_counts(self, request: HttpRequest):
-        today = timezone.now().date()
-        week_start = today - timezone.timedelta(days=today.weekday())
-        month_start = today.replace(day=1)
-
-        today_count = self.queryset.filter(
-            date_joined__gte=today
-        ).count()
-        week_count = self.queryset.filter(
-            date_joined__gte=week_start
-        ).count()
-        month_count = self.queryset.filter(
-            date_joined__gte=month_start
-        ).count()
-
-        data = {
-            'today': today_count,
-            'this_week': week_count,
-            'this_month': month_count,
-        }
-
-        return Response(data)
+# We remove the inherited CreateModelMixin
+# and DestroyModelMixin from the ModelViewSet,
+# since these are methods for the user
+# Check rest_framework/viewsets.py
+class AuthorViewSet(mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.ListModelMixin,
+                    viewsets.GenericViewSet,
+                    AuthorMixin):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+    permission_classes = [AuthorOwnerOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['surname', 'name']
