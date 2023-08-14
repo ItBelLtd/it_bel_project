@@ -20,7 +20,7 @@ class UserMixin:
         methods=['GET'],
         url_path='profile',
         detail=False,
-        permission_classes=[UserOwnerOrReadOnly, IsAuthenticated]
+        permission_classes=[UserOwnerOrReadOnly, IsAuthenticated, ],
     )
     def profile(self, request: HttpRequest):
         serializer = ProfileSerializer(request.user)
@@ -50,6 +50,7 @@ class UserMixin:
         for i in Follow.objects.filter(follower=user):
             following_authors.append(i.author)
         serializer = AuthorSerializer(following_authors, many=True)
+
         return Response(serializer.data)
 
 
