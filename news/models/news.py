@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 from .like import Like
+from .tag import Tag
 from users.models.author import Author
 
 
@@ -54,6 +55,10 @@ class News(models.Model):
         default=False,
     )
     likes = GenericRelation(Like)
+    tags = models.ManyToManyField(
+        Tag,
+        verbose_name='Теги',
+    )
 
     def __str__(self):
         return self.title
