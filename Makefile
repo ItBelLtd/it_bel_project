@@ -49,6 +49,12 @@ remigrate:
 	$(MANAGE_PY) migrate
 	@echo "Migrations recreated successfully."
 
+# Loaddata from fixtures
+loaddata:
+	@echo "Loading data..."
+	$(MANAGE_PY) loaddata fixtures/data.json
+
+
 # Runs all linter checks
 linter:
 	@echo "Running linter..."
@@ -90,4 +96,5 @@ help:
 	@echo "$(YELLOW)dc_clear$(NC)         : Clear all docker-compose data."
 	@echo "$(YELLOW)pull$(NC)             : Pulls changes from master branch."
 	@echo "$(YELLOW)linter$(NC)           : Runs linter checks."
+	@echo "$(YELLOW)loaddata$(NC)         : Loads data from fixtures."
 	@echo ""
