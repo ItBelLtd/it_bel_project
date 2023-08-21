@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
 
@@ -15,7 +16,7 @@ class UserMixin:
         methods=['GET'],
         url_path='profile',
         detail=False,
-        permission_classes=[UserOwnerOrReadOnly, ],
+        permission_classes=[UserOwnerOrReadOnly, IsAuthenticated, ],
     )
     def profile(self, request: HttpRequest):
         serializer = ProfileSerializer(request.user)

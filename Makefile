@@ -11,6 +11,8 @@ MANAGE_PY := $(VENV_NAME)/bin/python manage.py
 YELLOW := \033[0;33m
 RED := \033[0;31m
 NC := \033[0m
+GREEN := \033[0;32m
+
 
 # Create a virtual environment
 venv:
@@ -60,7 +62,7 @@ linter:
 	@echo "Running linter..."
 	isort .
 	flake8
-	@echo "If 'flake8' is the last message - all good"
+	@echo "$(GREEN)All good!$(NC)"
 
 
 
