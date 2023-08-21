@@ -8,9 +8,9 @@ from rest_framework.response import Response
 
 from ..models.follow import Follow
 from ..models.user import User
+from ..permissions.user import UserOwnerOrReadOnly
 from ..serializers.author import AuthorSerializer
 from ..serializers.profile import ProfileSerializer
-from ..permissions.user import UserOwnerOrReadOnly
 from ..services import (get_user_id_from_cache, send_email_reset_password,
                         send_email_verification, validate_email)
 
@@ -22,19 +22,19 @@ class UserMixin:
         detail=False,
         permission_classes=[UserOwnerOrReadOnly, IsAuthenticated, ],
     )
-    def profile(self, request: HttpRequest):
+    def profile(self, request: Request):
         serializer = ProfileSerializer(request.user)
         return Response(serializer.data)
 
     @profile.mapping.patch
-    def update_my_model(self, request: HttpRequest):
+    def update_my_model(self, request: Request):
         serializer = ProfileSerializer(request.user, data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
 
     @profile.mapping.delete
-    def profile_delete(self, request: HttpRequest):
+    def profile_delete(self, request: Request):
         serializer = ProfileSerializer(request.user)
         serializer.destroy()
         return Response({'detail': 'Success'}, status=204)
@@ -44,7 +44,7 @@ class UserMixin:
         detail=True,
         url_path='following',
     )
-    def user_following_list(self, request: HttpRequest, pk: int):
+    def user_following_list(self, request: Request, pk: int):
         user = get_object_or_404(User, user_id=pk)
         following_authors = []
         for i in Follow.objects.filter(follower=user):
@@ -54,17 +54,15 @@ class UserMixin:
         return Response(serializer.data)
 
 
-class EmailConfirmationPasswordRest:
-
+class EmailConfirmResetPasswordMixin:
     def get_user_for_confirm(self, user_id):
-        try:
-            user = self.get_queryset().get(pk=user_id)
-            return user
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user: User = self.get_queryset().filter(pk=user_id).first()
+        if not user:
             return Response(
                 'User not found',
                 status=status.HTTP_400_BAD_REQUEST
             )
+        return user
 
     @action(
         methods=['GET', ],
@@ -84,9 +82,9 @@ class EmailConfirmationPasswordRest:
                 status=status.HTTP_400_BAD_REQUEST
             )
         user: User = self.get_user_for_confirm(user_id=user_id)
-
         user.is_active = True
         user.save()
+
         return Response(
             'Email successfully confirmed',
             status=status.HTTP_200_OK
@@ -151,11 +149,10 @@ class EmailConfirmationPasswordRest:
         )
 
     @action(
-        methods=['POST', ],
+        methods=['GET', ],
         url_path='reset-password-confirm',
         detail=False,
         url_name='reset-password-confirm',
-
     )
     def reset_password_confirm(self, request: Request):
         user_id = get_user_id_from_cache(
@@ -180,7 +177,6 @@ class EmailConfirmationPasswordRest:
         url_path='set-new-password',
         detail=False,
         url_name='set-new-password',
-
     )
     def set_new_password(self, request: Request):
         user_id = request.data.get('user_id', '')
