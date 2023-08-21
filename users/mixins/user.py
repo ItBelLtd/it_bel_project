@@ -12,7 +12,7 @@ from ..serializers.author import AuthorSerializer
 from ..serializers.profile import ProfileSerializer
 from ..permissions.user import UserOwnerOrReadOnly
 from ..services import (get_user_id_from_cache, send_email_reset_password,
-                            send_email_verification, validate_email)
+                        send_email_verification, validate_email)
 
 
 class UserMixin:
