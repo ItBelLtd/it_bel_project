@@ -8,6 +8,7 @@ from ..models.user import User
 from ..serializers.author import AuthorSerializer
 from ..serializers.profile import ProfileSerializer
 from users.permissions.user import UserOwnerOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 
 class UserMixin:
@@ -15,7 +16,7 @@ class UserMixin:
         methods=['GET'],
         url_path='profile',
         detail=False,
-        permission_classes=[UserOwnerOrReadOnly, ],
+        permission_classes=[UserOwnerOrReadOnly, IsAuthenticated, ],
     )
     def profile(self, request: HttpRequest):
         serializer = ProfileSerializer(request.user)
