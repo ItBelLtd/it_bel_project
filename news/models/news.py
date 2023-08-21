@@ -58,6 +58,7 @@ class News(models.Model):
     tags = models.ManyToManyField(
         Tag,
         verbose_name='Теги',
+        blank=True
     )
 
     def __str__(self):

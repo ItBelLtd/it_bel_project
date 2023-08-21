@@ -1,0 +1,10 @@
+[
+  {
+    "model": "news.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Технологии",
+      "slug": "tech"
+    }
+  }
+]

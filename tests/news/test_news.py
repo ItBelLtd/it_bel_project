@@ -4,6 +4,7 @@ from rest_framework.test import APIClient, APITestCase
 
 from news.models.news import News
 from users.models.author import Author
+from news.models.tag import Tag
 
 
 class NewsTestCase(APITestCase):
@@ -14,6 +15,7 @@ class NewsTestCase(APITestCase):
         self.client = APIClient()
         self.client.force_authenticate(user=self.author.user)
         self.news = News.objects.get(news_id=1)
+        self.tag = Tag.objects.get(pk=1)
 
     def test_news_get(self):
         url = reverse("news-list")
@@ -33,7 +35,7 @@ class NewsTestCase(APITestCase):
         post_data = {
             "title": "string",
             "description": "string",
-            "content": "string"
+            "content": "string",
         }
 
         response = self.client.post(url, post_data, format='json')
@@ -46,7 +48,13 @@ class NewsTestCase(APITestCase):
         put_data = {
             "title": "string",
             "description": "string",
-            "content": "string"
+            "content": "string",
+            "tags": [
+                {
+                    "name": "string",
+                     "slug": "fdjfdf"
+                }
+            ]
         }
 
         response = self.client.put(url, put_data, format='json')

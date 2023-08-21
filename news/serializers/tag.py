@@ -1,4 +1,4 @@
-from models.tag import Tag
+from news.models.tag import Tag
 from rest_framework import serializers
 
 
