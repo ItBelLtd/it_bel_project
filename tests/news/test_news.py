@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
 from news.models.news import News
-from users.models.author import Author
 from news.models.tag import Tag
+from users.models.author import Author
 
 
 class NewsTestCase(APITestCase):

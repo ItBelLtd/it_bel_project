@@ -1,6 +1,7 @@
-from news.models.tag import Tag
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
+from news.models.tag import Tag
 from news.serializers.tag import TagSerializer
 
 

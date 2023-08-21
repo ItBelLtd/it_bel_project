@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .tag import TagSerializer
 
 from ..models.news import News
+from .tag import TagSerializer
 from users.serializers.author import AuthorSerializer
 
 
