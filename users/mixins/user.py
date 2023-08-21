@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
 
@@ -8,7 +9,6 @@ from ..models.user import User
 from ..serializers.author import AuthorSerializer
 from ..serializers.profile import ProfileSerializer
 from users.permissions.user import UserOwnerOrReadOnly
-from rest_framework.permissions import IsAuthenticated
 
 
 class UserMixin:
