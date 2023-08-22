@@ -1,12 +1,17 @@
+import sys
 import uuid
 
 from django.conf import settings
+from django.core.cache.backends.locmem import LocMemCache
 from django.core.mail import send_mail
 from django_redis.cache import RedisCache
 
 from users.models import User
 
-cache = RedisCache('redis://redis:6379/1', {})
+if 'test' in sys.argv:
+    cache = LocMemCache('unique-snowflake', {})
+else:
+    cache = RedisCache('redis://redis:6379/1', {})
 
 
 def get_user_id_from_cache(token: str, prefix_key: str):
