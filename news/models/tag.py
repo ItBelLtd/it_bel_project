@@ -6,7 +6,9 @@ class Tag(models.Model):
         max_length=64,
         verbose_name='Название тега',
     )
-    slug = models.SlugField()
+    slug = models.SlugField(
+        verbose_name='slug тега'
+    )
 
     class Meta:
         verbose_name = 'Тег'
