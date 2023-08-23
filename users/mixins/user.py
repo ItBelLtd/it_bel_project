@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
@@ -9,7 +10,6 @@ from ..models.user import User
 from ..permissions.user import UserOwnerOrReadOnly
 from ..serializers.author import AuthorSerializer
 from ..serializers.profile import ProfileSerializer
-from drf_spectacular.utils import extend_schema
 
 
 class UserMixin:

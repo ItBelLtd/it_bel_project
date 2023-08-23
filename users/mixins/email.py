@@ -1,4 +1,5 @@
 from django.conf import settings
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.request import Request
@@ -7,7 +8,6 @@ from rest_framework.response import Response
 from ..models.user import User
 from ..services import (get_user_id_from_cache, send_email_reset_password,
                         send_email_verification, validate_email)
-from drf_spectacular.utils import extend_schema
 
 
 class EmailMixin:

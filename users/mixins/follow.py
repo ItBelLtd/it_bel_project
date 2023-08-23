@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
@@ -7,7 +8,6 @@ from ..models.author import Author
 from ..models.follow import Follow
 from ..serializers.follow import FollowSerializer
 from ..serializers.users import UserListSerializer
-from drf_spectacular.utils import extend_schema
 
 
 class FollowMixin:
