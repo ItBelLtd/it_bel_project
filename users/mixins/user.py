@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.request import HttpRequest, Request
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 from ..models.follow import Follow
