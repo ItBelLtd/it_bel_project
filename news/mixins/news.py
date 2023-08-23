@@ -11,9 +11,11 @@ from rest_framework.response import Response
 from ..models.news import News
 from ..serializers.news import NewsSerializer
 from users.permissions.moderator import IsModerator
+from drf_spectacular.utils import extend_schema
 
 
 class NewsMixin:
+    @extend_schema(tags=['stats'])
     @action(
         methods=['GET', ],
         detail=False,
@@ -42,6 +44,7 @@ class NewsMixin:
         random.shuffle(news)
         return Response(NewsSerializer(news, many=True).data)
 
+    # @extend_schema(exclude=True) Waits for production
     @action(
         methods=['GET', ],
         detail=False,
@@ -53,6 +56,7 @@ class NewsMixin:
         serializer = NewsSerializer(news, many=True)
         return Response(serializer.data)
 
+    # @extend_schema(exclude=True) Waits for production
     @action(
         methods=['POST', ],
         detail=True,

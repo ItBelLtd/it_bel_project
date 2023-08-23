@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from ..models.author import Author
 from news.serializers.news import NewsSerializer
 from users.permissions.moderator import IsModerator
+from drf_spectacular.utils import extend_schema
 
 
 class AuthorMixin:
@@ -21,6 +22,7 @@ class AuthorMixin:
         serializer = NewsSerializer(news, many=True)
         return Response(serializer.data)
 
+    @extend_schema(tags=['stats'])
     @action(
         detail=False,
         methods=['GET', ],

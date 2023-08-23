@@ -6,8 +6,10 @@ from ..models.comment import Comment
 from ..models.news import News
 from ..permissions.comment import AuthorOrReadOnlyComments
 from ..serializers.comment import CommentSerializer
+from drf_spectacular.utils import extend_schema
 
 
+@extend_schema(tags=['comments'])
 class CommentViewSet(LikedMixin, viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()

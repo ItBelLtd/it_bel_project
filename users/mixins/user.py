@@ -9,9 +9,11 @@ from ..models.user import User
 from ..permissions.user import UserOwnerOrReadOnly
 from ..serializers.author import AuthorSerializer
 from ..serializers.profile import ProfileSerializer
+from drf_spectacular.utils import extend_schema
 
 
 class UserMixin:
+    @extend_schema(tags=['profile'])
     @action(
         methods=['GET'],
         url_path='profile',
@@ -22,13 +24,15 @@ class UserMixin:
         serializer = ProfileSerializer(request.user)
         return Response(serializer.data)
 
+    @extend_schema(tags=['profile'])
     @profile.mapping.patch
-    def update_my_model(self, request: Request):
+    def profile_update(self, request: Request):
         serializer = ProfileSerializer(request.user, data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
 
+    @extend_schema(tags=['profile'])
     @profile.mapping.delete
     def profile_delete(self, request: Request):
         serializer = ProfileSerializer(request.user)
@@ -41,6 +45,7 @@ class UserMixin:
         url_path='following',
     )
     def user_following_list(self, request: Request, pk: int):
+        # Can be refactored with related names
         user = get_object_or_404(User, user_id=pk)
         following_authors = []
         for i in Follow.objects.filter(follower=user):

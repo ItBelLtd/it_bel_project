@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from ..models.user import User
 from ..services import (get_user_id_from_cache, send_email_reset_password,
                         send_email_verification, validate_email)
+from drf_spectacular.utils import extend_schema
 
 
 class EmailMixin:
@@ -19,6 +20,7 @@ class EmailMixin:
             )
         return user
 
+    @extend_schema(tags=['email'])
     @action(
         methods=['GET', ],
         url_path='confirm',
@@ -45,6 +47,7 @@ class EmailMixin:
             status=status.HTTP_200_OK
         )
 
+    @extend_schema(tags=['email'])
     @action(
         methods=['POST', ],
         url_path='resend-confirmation-email',
@@ -74,6 +77,7 @@ class EmailMixin:
             status=status.HTTP_200_OK
         )
 
+    @extend_schema(tags=['email'])
     @action(
         methods=['POST', ],
         url_path='reset-password',
@@ -103,6 +107,7 @@ class EmailMixin:
             status=status.HTTP_200_OK
         )
 
+    @extend_schema(tags=['email'])
     @action(
         methods=['GET', ],
         url_path='reset-password-confirm',
@@ -127,6 +132,7 @@ class EmailMixin:
             status=status.HTTP_200_OK
         )
 
+    @extend_schema(tags=['email'])
     @action(
         methods=['POST', ],
         url_path='set-new-password',

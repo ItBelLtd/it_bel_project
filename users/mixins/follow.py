@@ -7,9 +7,11 @@ from ..models.author import Author
 from ..models.follow import Follow
 from ..serializers.follow import FollowSerializer
 from ..serializers.users import UserListSerializer
+from drf_spectacular.utils import extend_schema
 
 
 class FollowMixin:
+    @extend_schema(tags=['follows'])
     @action(
         methods=['POST', ],
         detail=True,
@@ -26,6 +28,7 @@ class FollowMixin:
         serializer.save()
         return Response({'detail': 'CREATED'}, status=201)
 
+    @extend_schema(tags=['follows'])
     @action(
         methods=['POST', ],
         detail=True,
@@ -40,6 +43,7 @@ class FollowMixin:
         follow.delete()
         return Response({'detail': 'NO_CONTENT'}, status=204)
 
+    @extend_schema(tags=['follows'])
     @action(
         methods=['GET', ],
         detail=True,
