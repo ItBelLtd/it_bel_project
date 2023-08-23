@@ -3,7 +3,7 @@ from rest_framework.exceptions import ValidationError
 
 from ..models.news import News
 from ..serializers.news import NewsSerializer
-from news.mixins import LikedMixin
+from news.mixins.like import LikedMixin
 from news.permissions.news import AuthorOrReadOnlyNews
 from users.models.user import User
 

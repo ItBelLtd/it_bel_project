@@ -7,11 +7,11 @@ from users.models.author import Author
 
 
 class TagTestCase(APITestCase):
-    fixtures = ['fixtures/tag.json']
+    fixtures = ['fixtures/news.json', 'fixtures/users.json']
 
     def setUp(self) -> None:
-        self.name = Tag.objects.get(pk=1)
-        self.author = Author.objects.get(author_id=2)
+        self.tag = Tag.objects.get(pk=1)
+        self.author = Author.objects.get(author_id=1)
         self.client = APIClient()
         self.client.force_authenticate(user=self.author.user)
 
@@ -21,8 +21,37 @@ class TagTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_tag_id_get(self):
+        url = reverse("tags-detail", args=[self.tag.pk])
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_tag_delete(self):
-        url = reverse("tags-detail", args=[self.name.pk])
+        url = reverse("tags-detail", args=[self.tag.pk])
         response = self.client.delete(url)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_tag_put(self):
+        url = reverse("tags-detail", args=[self.tag.pk])
+
+        put_data = {
+            "name": "string",
+            "slug": "k3fNHlB4MFeB5sgK8-JK8kkubXSg"
+        }
+        response = self.client.put(url, put_data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_tag_patch(self):
+        url = reverse("tags-detail", args=[self.tag.pk])
+
+        patch_data = {
+            "name": "string",
+            "slug": "v1czI6kl-hNNg5EFe-Pd3LcgtALbxUc-8X524_WhGh55CF3szz"
+        }
+
+        response = self.client.patch(url, patch_data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
