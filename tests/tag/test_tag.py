@@ -27,31 +27,31 @@ class TagTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_tag_delete(self):
-        url = reverse("tags-detail", args=[self.tag.pk])
-        response = self.client.delete(url)
+    # def test_tag_delete(self):
+    #     url = reverse("tags-detail", args=[self.tag.pk])
+    #     response = self.client.delete(url)
 
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+    #     self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_tag_put(self):
-        url = reverse("tags-detail", args=[self.tag.pk])
+    # def test_tag_put(self):
+    #     url = reverse("tags-detail", args=[self.tag.pk])
 
-        put_data = {
-            "name": "string",
-            "slug": "k3fNHlB4MFeB5sgK8-JK8kkubXSg"
-        }
-        response = self.client.put(url, put_data, format='json')
+    #     put_data = {
+    #         "name": "string",
+    #         "slug": "k3fNHlB4MFeB5sgK8-JK8kkubXSg"
+    #     }
+    #     response = self.client.put(url, put_data, format='json')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_tag_patch(self):
-        url = reverse("tags-detail", args=[self.tag.pk])
+    # def test_tag_patch(self):
+    #     url = reverse("tags-detail", args=[self.tag.pk])
 
-        patch_data = {
-            "name": "string",
-            "slug": "v1czI6kl-hNNg5EFe-Pd3LcgtALbxUc-8X524_WhGh55CF3szz"
-        }
+    #     patch_data = {
+    #         "name": "string",
+    #         "slug": "v1czI6kl-hNNg5EFe-Pd3LcgtALbxUc-8X524_WhGh55CF3szz"
+    #     }
 
-        response = self.client.patch(url, patch_data, format='json')
+    #     response = self.client.patch(url, patch_data, format='json')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)

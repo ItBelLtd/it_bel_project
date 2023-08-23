@@ -1,7 +1,8 @@
 from django.conf import settings
 from rest_framework import viewsets
 
-from ..mixins.user import EmailConfirmResetPasswordMixin, UserMixin
+from ..mixins.email import EmailMixin
+from ..mixins.user import UserMixin
 from ..models.user import User
 from ..serializers.users import (UserCreateSerializer, UserListSerializer,
                                  UserUpdateSerializer)
@@ -12,7 +13,7 @@ from users.permissions.user import UserOwnerOrReadOnly
 class UserViewSet(
     viewsets.ModelViewSet,
     UserMixin,
-    EmailConfirmResetPasswordMixin
+    EmailMixin
 ):
     queryset = User.objects.all()
     permission_classes = [UserOwnerOrReadOnly, ]

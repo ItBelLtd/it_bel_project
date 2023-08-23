@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
@@ -21,6 +22,7 @@ class AuthorMixin:
         serializer = NewsSerializer(news, many=True)
         return Response(serializer.data)
 
+    @extend_schema(tags=['stats'])
     @action(
         detail=False,
         methods=['GET', ],

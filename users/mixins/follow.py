@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
@@ -10,6 +11,7 @@ from ..serializers.users import UserListSerializer
 
 
 class FollowMixin:
+    @extend_schema(tags=['follows'])
     @action(
         methods=['POST', ],
         detail=True,
@@ -26,6 +28,7 @@ class FollowMixin:
         serializer.save()
         return Response({'detail': 'CREATED'}, status=201)
 
+    @extend_schema(tags=['follows'])
     @action(
         methods=['POST', ],
         detail=True,
@@ -40,6 +43,7 @@ class FollowMixin:
         follow.delete()
         return Response({'detail': 'NO_CONTENT'}, status=204)
 
+    @extend_schema(tags=['follows'])
     @action(
         methods=['GET', ],
         detail=True,
