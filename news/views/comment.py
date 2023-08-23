@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 
+from ..mixins.like import LikedMixin
 from ..models.comment import Comment
 from ..models.news import News
 from ..serializers.comment import CommentSerializer
-from news.mixins import LikedMixin
 from news.permissions.comment import AuthorOrReadOnlyComments
 
 

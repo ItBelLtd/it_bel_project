@@ -4,11 +4,11 @@ from datetime import timedelta
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from models.news import News
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
 
+from ..models.news import News
 from ..serializers.news import NewsSerializer
 from users.permissions.moderator import IsModerator
 
