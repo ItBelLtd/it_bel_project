@@ -1,4 +1,3 @@
-import sys
 import uuid
 
 from django.conf import settings
@@ -8,7 +7,6 @@ from django_redis.cache import RedisCache
 
 from users.models import User
 from users.serializers.users import EmaiSerializer
-from django.conf import settings
 
 if not settings.DOCKER:
     cache = LocMemCache('unique-snowflake', {})
