@@ -16,6 +16,7 @@ class UserViewSet(
 ):
     queryset = User.objects.all()
     permission_classes = [UserOwnerOrReadOnly, ]
+    serializer_class = UserCreateSerializer
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -28,5 +29,5 @@ class UserViewSet(
         if not settings.IT_BEL_EMAIL_CONFIRMATION_ENABLED:
             serializer.save(is_active=True)
             return
-        user = serializer.save()
+        user = serializer.save(is_active=False)
         send_email_verification(user=user, viewset_instance=self)
