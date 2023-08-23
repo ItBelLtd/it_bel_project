@@ -1,14 +1,15 @@
 from rest_framework import filters, viewsets
 from rest_framework.exceptions import ValidationError
 
+from ..mixins.like import LikedMixin
 from ..models.news import News
+from ..permissions.news import AuthorOrReadOnlyNews
 from ..serializers.news import NewsSerializer
 from news.mixins.news import NewsMixin
-from news.permissions.news import AuthorOrReadOnlyNews
 from users.models.user import User
 
 
-class NewsViewSet(NewsMixin, viewsets.ModelViewSet):
+class NewsViewSet(NewsMixin, viewsets.ModelViewSet, LikedMixin):
 
     queryset = News.objects.all()
     serializer_class = NewsSerializer

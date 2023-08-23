@@ -34,8 +34,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
             if author_data is not None:
                 Author.objects.create(user=user, **author_data)
-
             return user
+
         except serializers.ValidationError as exc:
             user.delete()
             raise exc
@@ -53,3 +53,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email']
+
+
+class EmaiSerializer(serializers.Serializer):
+    email = serializers.EmailField()
