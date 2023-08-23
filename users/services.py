@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django_redis.cache import RedisCache
 
 from users.models import User
+from users.serializers.users import EmaiSerializer
 
 if 'test' in sys.argv:
     cache = LocMemCache('unique-snowflake', {})
@@ -70,3 +71,9 @@ def send_email_reset_password(user: User, viewset_instance):
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[user.email],
     )
+
+
+def validate_email(email: str):
+    serializer = EmaiSerializer(data={'email': email})
+    serializer.is_valid(raise_exception=True)
+    return serializer.validated_data.get('email')

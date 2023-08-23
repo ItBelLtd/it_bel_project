@@ -174,6 +174,7 @@ CACHES = {
 IT_BEL_USER_CONFIRMATION_KEY = 'user_confirmation_{token}'
 IT_BEL_USER_CONFIRMATION_TIMEOUT = 300
 IT_BEL_PASSWORD_RESET_CODE = 'password_reset_{token}'
+IT_BEL_EMAIL_CONFIRMATION_ENABLED = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
