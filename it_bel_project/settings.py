@@ -31,7 +31,7 @@ DEBUG = True
 
 DOCKER = env('DOCKER', default=False)
 
-IT_BEL_EMAIL_CONFIRMATION_ENABLED = False
+EMAIL_CONFIRMATION = False
 
 ALLOWED_HOSTS = ['*']
 

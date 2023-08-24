@@ -28,7 +28,7 @@ class UserViewSet(
         return UserListSerializer
 
     def perform_create(self, serializer: UserCreateCustomSerializer):
-        if not settings.IT_BEL_EMAIL_CONFIRMATION_ENABLED:
+        if not settings.EMAIL_CONFIRMATION:
             serializer.save(is_active=True)
             return
         user = serializer.save(is_active=False)
