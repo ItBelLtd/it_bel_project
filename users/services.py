@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django_redis.cache import RedisCache
 
 from users.models import User
-from users.serializers.users import EmaiSerializer
+from users.serializers.users import EmailSerializer
 
 if not settings.DOCKER:
     cache = LocMemCache('unique-snowflake', {})
@@ -22,13 +22,13 @@ def get_user_id_from_cache(token: str, prefix_key: str):
 
 def send_email_verification(user: User, viewset_instance):
     token = uuid.uuid4().hex
-    redis_key = settings.IT_BEL_USER_CONFIRMATION_KEY.format(
+    redis_key = settings.IT_BEL_USER_CONFIRM_KEY.format(
         token=token
     )
     cache.set(
         redis_key,
         {'user_id': user.pk},
-        timeout=settings.IT_BEL_USER_CONFIRMATION_TIMEOUT
+        timeout=settings.IT_BEL_USER_CONFIRM_TIMEOUT
     )
     # reverse_action возвращает http://back, пока им не пользуемся
     confirm_link_url = viewset_instance.reverse_action(  # noqa
@@ -36,7 +36,7 @@ def send_email_verification(user: User, viewset_instance):
         request=viewset_instance.request,
     )
     confirm_link = (f'http://127.0.0.1/api/users/confirm/?'
-                    f'confirmation_token={token}&user_id={user.pk}')
+                    f'confirm_token={token}&user_id={user.pk}')
     message = f'Confirm your email: {confirm_link}'
     send_mail(
         subject='Confirm your email',
@@ -54,7 +54,7 @@ def send_email_reset_password(user: User, viewset_instance):
     cache.set(
         redis_key,
         {'user_id': user.pk},
-        timeout=settings.IT_BEL_USER_CONFIRMATION_TIMEOUT
+        timeout=settings.IT_BEL_USER_CONFIRM_TIMEOUT
     )
     # reverse_action возвращает http://back, пока им не пользуемся
     confirm_link_url = viewset_instance.reverse_action(  # noqa
@@ -62,7 +62,7 @@ def send_email_reset_password(user: User, viewset_instance):
         request=viewset_instance.request,
     )
     confirm_link = (f'http://127.0.0.1/api/users/reset-password-confirm/?'
-                    f'confirmation_token={token}&user_id={user.pk}')
+                    f'confirm_token={token}&user_id={user.pk}')
     message = f'For set new password go to the link: {confirm_link}'
     send_mail(
         subject='Reset password',
@@ -73,6 +73,6 @@ def send_email_reset_password(user: User, viewset_instance):
 
 
 def validate_email(email: str):
-    serializer = EmaiSerializer(data={'email': email})
+    serializer = EmailSerializer(data={'email': email})
     serializer.is_valid(raise_exception=True)
     return serializer.validated_data.get('email')

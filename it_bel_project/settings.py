@@ -31,7 +31,7 @@ DEBUG = True
 
 DOCKER = env('DOCKER', default=False)
 
-EMAIL_CONFIRMATION = False
+EMAIL_CONFIRM = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -177,10 +177,10 @@ CACHES = {
     }
 }
 
-if EMAIL_CONFIRMATION:
-    IT_BEL_USER_CONFIRMATION_KEY = 'user_confirmation_{token}'
-    IT_BEL_USER_CONFIRMATION_TIMEOUT = 300
+if EMAIL_CONFIRM:
+    IT_BEL_USER_CONFIRM_KEY = 'user_confirm_{token}'
     IT_BEL_PASSWORD_RESET_CODE = 'password_reset_{token}'
+    IT_BEL_USER_CONFIRM_TIMEOUT = 300
 
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'

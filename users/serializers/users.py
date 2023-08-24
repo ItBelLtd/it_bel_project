@@ -55,5 +55,5 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         fields = ['username', 'email']
 
 
-class EmaiSerializer(serializers.Serializer):
+class EmailSerializer(serializers.Serializer):
     email = serializers.EmailField()
