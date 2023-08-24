@@ -65,6 +65,17 @@ linter:
 	@echo "$(GREEN)All good!$(NC)"
 
 
+# Runs all linter checks with pushing (secret)
+linterf:
+	@echo "Running linter..."
+	isort .
+	flake8
+	@echo "$(GREEN)All good!$(NC)"
+
+	git add --a
+	git commit -m 'linter fixes'
+	git push
+
 
 # Run the docker-compose
 dc:
