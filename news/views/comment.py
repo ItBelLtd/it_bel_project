@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets
 
-from ..mixins.like import LikedMixin
+from ..mixins.like import LikeMixin
 from ..models.comment import Comment
 from ..models.news import News
 from ..permissions.comment import AuthorOrReadOnlyComments
@@ -10,7 +10,7 @@ from ..serializers.comment import CommentSerializer
 
 
 @extend_schema(tags=['comments'])
-class CommentViewSet(LikedMixin, viewsets.ModelViewSet):
+class CommentViewSet(LikeMixin, viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
     permission_classes = [AuthorOrReadOnlyComments]

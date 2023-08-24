@@ -5,7 +5,20 @@ from django.db import models
 from django.utils import timezone
 
 
-class Like(models.Model):
+class LikeDislike(models.Model):
+    LIKE = 1
+    DISLIKE = -1
+
+    VOTES = (
+        (DISLIKE, 'Не нравится'),
+        (LIKE, 'Нравится')
+    )
+
+    vote = models.SmallIntegerField(
+        verbose_name='Голос',
+        choices=VOTES,
+    )
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
