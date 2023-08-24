@@ -4,7 +4,8 @@ from rest_framework import viewsets
 from ..mixins.email import EmailMixin
 from ..mixins.user import UserMixin
 from ..models.user import User
-from ..serializers.users import (UserCreateSerializer, UserListSerializer,
+from ..serializers.users import (UserCreateCustomSerializer,
+                                 UserListSerializer,
                                  UserUpdateSerializer)
 from ..services import send_email_verification
 from users.permissions.user import UserOwnerOrReadOnly
@@ -17,16 +18,16 @@ class UserViewSet(
 ):
     queryset = User.objects.all()
     permission_classes = [UserOwnerOrReadOnly, ]
-    serializer_class = UserCreateSerializer
+    serializer_class = UserCreateCustomSerializer
 
     def get_serializer_class(self):
         if self.action == 'create':
-            return UserCreateSerializer
+            return UserCreateCustomSerializer
         if self.action in ('update', 'partial_update'):
             return UserUpdateSerializer
         return UserListSerializer
 
-    def perform_create(self, serializer: UserCreateSerializer):
+    def perform_create(self, serializer: UserCreateCustomSerializer):
         if not settings.IT_BEL_EMAIL_CONFIRMATION_ENABLED:
             serializer.save(is_active=True)
             return

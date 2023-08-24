@@ -4,7 +4,7 @@ from djoser.views import TokenCreateView
 from rest_framework import status
 from rest_framework.response import Response
 
-from .serializers import CustomTokenSerializer
+from ..serializers import CustomTokenSerializer
 
 
 class CustomTokenCreateView(TokenCreateView):
