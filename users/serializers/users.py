@@ -6,10 +6,10 @@ from ..models.user import User
 from users.serializers.author import AuthorSerializer
 
 
-class UserCreateSerializer(serializers.ModelSerializer):
+class UserCreateCustomSerializer(serializers.ModelSerializer):
+    author = AuthorSerializer(required=False)
     password = serializers.CharField(write_only=True)
     date_joined = serializers.CharField(read_only=True)
-    author = AuthorSerializer(required=False)
 
     class Meta:
         model = User

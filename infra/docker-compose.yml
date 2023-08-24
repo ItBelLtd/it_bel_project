@@ -17,6 +17,7 @@ services:
       - ../.env
     volumes:
       - static_dir:/app/static/
+      - media_dir:/app/covers/
     depends_on:
       - db
       - redis
@@ -37,6 +38,7 @@ services:
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
       - static_dir:/etc/nginx/html/static/
+      - media_dir:/etc/nginx/html/media/
 
     depends_on:
       - back
@@ -47,4 +49,5 @@ services:
 
 volumes:
   static_dir:
+  media_dir:
   postgres_data:

@@ -31,7 +31,7 @@ DEBUG = True
 
 DOCKER = env('DOCKER', default=False)
 
-IT_BEL_EMAIL_CONFIRMATION_ENABLED = False
+EMAIL_CONFIRMATION = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -148,6 +148,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
+
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -176,7 +177,7 @@ CACHES = {
     }
 }
 
-if IT_BEL_EMAIL_CONFIRMATION_ENABLED:
+if EMAIL_CONFIRMATION:
     IT_BEL_USER_CONFIRMATION_KEY = 'user_confirmation_{token}'
     IT_BEL_USER_CONFIRMATION_TIMEOUT = 300
     IT_BEL_PASSWORD_RESET_CODE = 'password_reset_{token}'
