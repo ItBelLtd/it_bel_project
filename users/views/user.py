@@ -5,8 +5,7 @@ from ..mixins.email import EmailMixin
 from ..mixins.user import UserMixin
 from ..models.user import User
 from ..serializers.users import (UserCreateCustomSerializer,
-                                 UserListSerializer,
-                                 UserUpdateSerializer)
+                                 UserListSerializer, UserUpdateSerializer)
 from ..services import send_email_verification
 from users.permissions.user import UserOwnerOrReadOnly
 
