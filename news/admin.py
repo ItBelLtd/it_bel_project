@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models.comment import Comment
-from .models.like import Like
+from .models.like import LikeDislike
 from .models.news import News
 
 
@@ -15,6 +15,6 @@ class CommentAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Like)
+@admin.register(LikeDislike)
 class LikeAdmin(admin.ModelAdmin):
     pass

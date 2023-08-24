@@ -5,20 +5,23 @@ from rest_framework.response import Response
 from .. import services
 
 
-class LikedMixin:
+class LikeMixin:
 
     @action(detail=True,
             methods=['POST'],
             permission_classes=[IsAuthenticated]
             )
     def like(self, request, pk=None, news_id=None):
-        services.add_like(obj=self.get_object(), user=request.user)
+        services.add_remove_like(obj=self.get_object(), user=request.user)
         return Response({'status': 'ok'})
+
+
+class DislikeMixin:
 
     @action(detail=True,
             methods=['POST'],
             permission_classes=[IsAuthenticated]
             )
-    def unlike(self, request, pk=None, news_id=None):
-        services.remove_like(obj=self.get_object(), user=request.user)
+    def dislike(self, request, pk=None, news_id=None):
+        services.add_remove_dislike(obj=self.get_object(), user=request.user)
         return Response({'status': 'ok'})

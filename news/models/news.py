@@ -2,7 +2,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils import timezone
 
-from .like import Like
+from .like import LikeDislike
 from .tag import Tag
 from users.models.author import Author
 
@@ -54,19 +54,27 @@ class News(models.Model):
         verbose_name='Просмотрена ли модераторами',
         default=False,
     )
-    likes = GenericRelation(Like)
     tags = models.ManyToManyField(
         Tag,
         verbose_name='Теги',
         blank=True
     )
-
-    def __str__(self):
-        return self.title
+    votes = GenericRelation(LikeDislike)
 
     @property
     def total_likes(self) -> int:
-        return self.likes.count()
+        return self.votes.filter(vote=LikeDislike.LIKE).count()
+
+    @property
+    def total_dislikes(self) -> int:
+        return self.votes.filter(vote=LikeDislike.DISLIKE).count()
+
+    @property
+    def sum_rating(self) -> int:
+        return self.votes.aggregate(models.Sum('vote')).get('vote__sum') or 0
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = "Новость"
