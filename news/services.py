@@ -43,14 +43,15 @@ def get_remove_vote(obj, obj_type, user):
     """Удалить лайк или дизлайк с объекта
     и вернуть его значение"""
 
-    vote = Like.objects.filter(
-        content_type=obj_type,
+    like = Like.objects.filter(
         object_id=obj.pk,
+        content_type=obj_type,
         user=user
     ).first()
-    if vote:
-        vote_value = vote.vote
-        vote.delete()
-        return vote_value  # noqa
 
-    return None
+    if not like:
+        return None
+
+    vote_value = like.vote
+    like.delete()
+    return vote_value  # noqa
