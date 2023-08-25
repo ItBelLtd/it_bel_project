@@ -2,7 +2,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils import timezone
 
-from .like import LikeDislike
+from .like import Like
 from .news import News
 from users.models.user import User
 
@@ -37,7 +37,7 @@ class Comment(models.Model):
         verbose_name='Комментарий от автора',
         default=False,
     )
-    likes = GenericRelation(LikeDislike)
+    likes = GenericRelation(Like)
 
     @property
     def total_likes(self) -> int:
