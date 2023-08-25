@@ -5,7 +5,7 @@ from django.db import models
 from django.utils import timezone
 
 
-class LikeDislike(models.Model):
+class Like(models.Model):
     LIKE = 1
     DISLIKE = -1
 

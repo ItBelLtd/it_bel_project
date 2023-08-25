@@ -1,6 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 
-from news.models.like import LikeDislike
+from news.models.like import Like
 
 
 def add_remove_like(obj, user):
@@ -9,14 +9,14 @@ def add_remove_like(obj, user):
     obj_type = ContentType.objects.get_for_model(obj)
     vote_val = get_remove_vote(obj=obj, obj_type=obj_type, user=user)
 
-    if vote_val == LikeDislike.LIKE:
+    if vote_val == Like.LIKE:
         return
-    if vote_val == LikeDislike.DISLIKE or vote_val is None:
-        LikeDislike.objects.create(
+    if vote_val == Like.DISLIKE or vote_val is None:
+        Like.objects.create(
             content_type=obj_type,
             object_id=obj.pk,
             user=user,
-            vote=LikeDislike.LIKE
+            vote=Like.LIKE
         )
     return
 
@@ -27,14 +27,14 @@ def add_remove_dislike(obj, user):
     obj_type = ContentType.objects.get_for_model(obj)
     vote_val = get_remove_vote(obj=obj, obj_type=obj_type, user=user)
 
-    if vote_val == LikeDislike.DISLIKE:
+    if vote_val == Like.DISLIKE:
         return
-    if vote_val == LikeDislike.LIKE or vote_val is None:
-        LikeDislike.objects.create(
+    if vote_val == Like.LIKE or vote_val is None:
+        Like.objects.create(
             content_type=obj_type,
             object_id=obj.pk,
             user=user,
-            vote=LikeDislike.DISLIKE
+            vote=Like.DISLIKE
         )
     return
 
@@ -43,11 +43,11 @@ def get_remove_vote(obj, obj_type, user):
     """Удалить лайк или дизлайк с объекта
     и вернуть его значение"""
 
-    vote = LikeDislike.objects.filter(
+    vote = Like.objects.filter(
         content_type=obj_type,
         object_id=obj.pk,
         user=user
-        ).first()
+    ).first()
     if vote:
         vote_value = vote.vote
         vote.delete()

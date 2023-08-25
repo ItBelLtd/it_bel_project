@@ -2,7 +2,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils import timezone
 
-from .like import LikeDislike
+from .like import Like
 from .tag import Tag
 from users.models.author import Author
 
@@ -59,15 +59,15 @@ class News(models.Model):
         verbose_name='Теги',
         blank=True
     )
-    votes = GenericRelation(LikeDislike)
+    votes = GenericRelation(Like)
 
     @property
     def total_likes(self) -> int:
-        return self.votes.filter(vote=LikeDislike.LIKE).count()
+        return self.votes.filter(vote=Like.LIKE).count()
 
     @property
     def total_dislikes(self) -> int:
-        return self.votes.filter(vote=LikeDislike.DISLIKE).count()
+        return self.votes.filter(vote=Like.DISLIKE).count()
 
     @property
     def sum_rating(self) -> int:
