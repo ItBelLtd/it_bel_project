@@ -40,8 +40,8 @@ class EmailMixin:
         user.save()
 
         return Response(
-            'Email successfully confirmed',
-            status=status.HTTP_200_OK
+            status=status.HTTP_302_FOUND,
+            headers={'Location': 'http://localhost:3000/signin'}
         )
 
     @extend_schema(tags=['email'])
