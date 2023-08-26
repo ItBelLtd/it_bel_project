@@ -45,7 +45,7 @@ class EmailMixin:
             headers={'Location': 'http://localhost:3000/signin'}
         )
 
-        token = utils.login_user(self.request, request.user)
+        token = utils.login_user(self.request, user)
 
         response.set_cookie('userToken', token,
                             max_age=1000000000, samesite=None)
