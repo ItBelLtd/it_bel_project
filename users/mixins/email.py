@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from ..models.user import User
 from ..services import (get_user_id_from_cache, send_email_reset_password,
                         send_email_verification, validate_email)
+from djoser import utils
 
 
 class EmailMixin:
@@ -39,10 +40,17 @@ class EmailMixin:
         user.is_active = True
         user.save()
 
-        return Response(
+        response = Response(
             status=status.HTTP_302_FOUND,
             headers={'Location': 'http://localhost:3000/signin'}
         )
+
+        token = utils.login_user(self.request, request.user)
+
+        response.set_cookie('userToken', token,
+                            max_age=1000000000, samesite=None)
+
+        return response
 
     @extend_schema(tags=['email'])
     @action(
