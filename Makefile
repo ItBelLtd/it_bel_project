@@ -57,6 +57,12 @@ loaddata:
 	$(MANAGE_PY) loaddata fixtures/data.json
 
 
+# Shortcut to createsuperuser
+superuser:
+	@echo "Creating superuser..."
+	$(MANAGE_PY) createsuperuser
+
+
 # Runs all linter checks
 linter:
 	@echo "Running linter..."

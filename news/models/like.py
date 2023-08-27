@@ -42,3 +42,6 @@ class Like(models.Model):
 
     class Meta:
         ordering = ['-added']
+
+        verbose_name = "Лайк"
+        verbose_name_plural = "Лайки"
