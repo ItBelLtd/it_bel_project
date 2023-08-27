@@ -4,7 +4,6 @@ from datetime import timedelta
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
 from rest_framework.request import HttpRequest
 from rest_framework.response import Response
@@ -15,7 +14,6 @@ from users.permissions.moderator import IsModerator
 
 
 class NewsMixin:
-    @extend_schema(tags=['stats'])
     @action(
         methods=['GET', ],
         detail=False,
@@ -37,7 +35,7 @@ class NewsMixin:
         news = News.objects.filter(
             added__gte=date
         ).annotate(
-            likes_total=Count('likes')
+            likes_total=Count('votes')
         ).order_by(
             'likes_total'
         )[:6]
