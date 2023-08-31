@@ -48,6 +48,7 @@ class AuthorsTestCase(APITestCase):
             'name': 'test name',
             'surname': 'test surname',
             'age': 19,
+            'bio': 'Test bio'
         }
 
         response = self.client.put(url, put_data, format='json')
