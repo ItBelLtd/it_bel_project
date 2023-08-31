@@ -1,12 +1,11 @@
+from django.contrib.contenttypes.models import ContentType
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 
-from ..models.news import News
-from .tag import TagSerializer
-from users.serializers.author import AuthorSerializer
 from ..models.like import Like
-from django.contrib.contenttypes.models import ContentType
+from ..models.news import News
 from ..models.tag import Tag
+from users.serializers.author import AuthorSerializer
 
 
 class NewsSerializer(serializers.ModelSerializer):

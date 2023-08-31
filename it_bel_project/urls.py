@@ -1,8 +1,8 @@
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.views.generic.base import RedirectView
-from django.conf import settings
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 port = ":8000" if not settings.DOCKER else ""
 docs_url = f'http://127.0.0.1{port}/api/docs/'
