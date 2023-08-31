@@ -26,6 +26,7 @@ class Like(models.Model):
         verbose_name='Пользователь',
     )
     content_type = models.ForeignKey(
+
         ContentType,
         on_delete=models.CASCADE,
         verbose_name='Тип контента',

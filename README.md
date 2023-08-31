@@ -10,7 +10,7 @@
 
 - Docs is available at http://127.0.0.1/api/docs
 - Lots of useful stuff lays in Makefile, check it with `make help` in same folder with Makefile
-- You can turn on/off email system in settings.py file, check EMAIL_CONFIRM constant
+- You can turn on/off email system in settings.py file, check EMAIL_CONFIRM constant, settings.py file itself lays in it_bel_project directory
 
 # Open bash terminal
 
