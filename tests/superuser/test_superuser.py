@@ -9,7 +9,7 @@ class SuperUserTestCase(APITestCase):
     def setUp(self):
         self.user = User.objects.get(user_id=1)
         self.client = APIClient()
-        self.client.force_authenticate(user=self.user)
+        #self.client.force_authenticate(user=self.user)
 
     def test_superusers_get(self):
         url = reverse("users-list")

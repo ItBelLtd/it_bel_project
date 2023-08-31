@@ -11,7 +11,7 @@
       "is_staff": true,
       "is_superuser": true,
       "is_active": true,
-      "is_moderator": true,
+      "is_moderator": false,
       "groups": [],
       "user_permissions": []
     }
