@@ -9,7 +9,7 @@ class Author(models.Model):
 
     author_id = models.AutoField(
         primary_key=True,
-        verbose_name="ID автора"
+        verbose_name="ID"
     )
     user = models.OneToOneField(
         User,
@@ -19,22 +19,27 @@ class Author(models.Model):
         blank=True,
     )
     name = models.CharField(
-        verbose_name="Имя автора",
+        verbose_name="Имя",
         max_length=150,
         null=False,
         blank=False
     )
     surname = models.CharField(
-        verbose_name="Фамилия автора",
+        verbose_name="Фамилия",
         max_length=150,
         null=False,
         blank=False
     )
     age = models.IntegerField(
-        verbose_name="Возраст автора",
+        verbose_name="Возраст",
         null=False,
         blank=False,
         help_text="Возраст"
+    )
+    bio = models.TextField(
+        verbose_name='Биография',
+        null=False,
+        blank=False,
     )
     date_joined = models.DateTimeField(
         verbose_name="Дата регистрации",
