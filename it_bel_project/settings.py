@@ -29,7 +29,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-EMAIL_CONFIRM = True
+EMAIL_CONFIRM = False
 
 DOCKER = env('DOCKER', default=False)
 

@@ -36,6 +36,9 @@ class NewsTestCase(APITestCase):
             "title": "string",
             "description": "string",
             "content": "string",
+            "tags": [
+                1
+            ]
         }
 
         response = self.client.post(url, post_data, format='json')
@@ -50,10 +53,7 @@ class NewsTestCase(APITestCase):
             "description": "string",
             "content": "string",
             "tags": [
-                {
-                    "name": "string",
-                     "slug": "fdjfdf"
-                }
+                1
             ]
         }
 
