@@ -27,7 +27,7 @@ services:
       - db
       - redis
     command: |
-      bash -c "./wait-for-it.sh db:5432 -- python3 manage.py makemigrations;
+      bash -c "python3 manage.py makemigrations;
         python3 manage.py migrate;
         python3 manage.py loaddata fixtures/data.json;
         gunicorn it_bel_project.wsgi:application --bind 0:8000"
