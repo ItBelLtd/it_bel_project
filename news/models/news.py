@@ -76,6 +76,12 @@ class News(models.Model):
     def __str__(self):
         return self.title
 
+    def get_date(self):
+        day = self.added.day
+        month = self.added.month
+        year = self.added.year
+        return f"{day} {month} {year}"
+
     class Meta:
         verbose_name = "Новость"
         verbose_name_plural = "Новости"
