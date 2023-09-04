@@ -1,4 +1,3 @@
-import random
 from datetime import timedelta
 
 from django.db.models import Count
@@ -39,7 +38,6 @@ class NewsMixin:
         ).order_by(
             'likes_total'
         )[:6]
-        random.shuffle(news)
         return Response(NewsSerializer(news, many=True).data)
 
     # @extend_schema(exclude=True) Waits for production

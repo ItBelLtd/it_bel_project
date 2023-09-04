@@ -1,5 +1,4 @@
 import unicodedata
-from random import randint
 
 from django.contrib.auth.models import UserManager as _UserManager
 from django.db.transaction import atomic
@@ -17,9 +16,7 @@ class UserManager(_UserManager):
             email = self.normalize_email(email)
 
         user = self.model(
-            username=unicodedata.normalize(
-                "NFKC", username or f'username{randint(100000, 999999)}'
-            ),
+            username=unicodedata.normalize("NFKC"),
             email=email,
             **extra_fields
         )

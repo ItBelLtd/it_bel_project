@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
@@ -22,10 +24,18 @@ class UserCreateCustomSerializer(serializers.ModelSerializer):
         return password
 
     def create(self, validated_data: dict):
+        if 'username' in validated_data:
+            username = validated_data.pop('username')
+        else:
+            username = f'username{random.randint(1000000, 9999999)}'
+
         password = validated_data.pop('password')
         author_data = validated_data.pop('author', None)
 
-        user: User = super().create(validated_data)
+        user = User.objects.create(
+            username=username,
+            **validated_data
+        )
 
         try:
             user.set_password(password)
@@ -41,9 +51,23 @@ class UserCreateCustomSerializer(serializers.ModelSerializer):
 
 
 class UserListSerializer(serializers.ModelSerializer):
+    as_author = serializers.SerializerMethodField(read_only=True)
+    date_joined = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ['user_id', 'username', 'date_joined']
+        fields = ['user_id', 'username', 'date_joined', 'as_author']
+
+    def get_as_author(self, user: User):
+        author = Author.objects.filter(user=user).first()
+        if not author:
+            return None
+
+        serializer = AuthorSerializer(author)
+        return serializer.data
+
+    def get_date_joined(self, obj: Author) -> str:
+        return obj.get_date()
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
