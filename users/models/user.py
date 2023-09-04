@@ -53,6 +53,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f"{self.username} ({self.email})"
 
+    def get_date(self):
+        day = self.date_joined.day
+        month = self.date_joined.month
+        year = self.date_joined.year
+        return f"{day} {month} {year}"
+
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
