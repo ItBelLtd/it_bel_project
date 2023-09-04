@@ -14,8 +14,8 @@ class NewsSerializer(serializers.ModelSerializer):
     tags = serializers.PrimaryKeyRelatedField(
         queryset=Tag.objects.all(), many=True
     )
-
     vote = serializers.SerializerMethodField(read_only=True)
+    added = serializers.SerializerMethodField()
 
     class Meta:
         model = News
@@ -38,10 +38,6 @@ class NewsSerializer(serializers.ModelSerializer):
             'total_likes',
             'total_dislikes',
             'sum_rating',
-            'added',
-            'tags',
-            'author',
-            'vote'
         ]
 
     def get_vote(self, obj: News) -> int:
@@ -59,6 +55,9 @@ class NewsSerializer(serializers.ModelSerializer):
             return 0
 
         return like.vote
+
+    def get_added(self, obj: News) -> str:
+        return obj.get_date()
 
     def create(self, validated_data):
         tags = validated_data.pop('tags')

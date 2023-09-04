@@ -9,7 +9,6 @@ from users.serializers.author import AuthorSerializer
 class UserCreateCustomSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(required=False)
     password = serializers.CharField(write_only=True)
-    date_joined = serializers.CharField(read_only=True)
 
     class Meta:
         model = User
@@ -42,8 +41,6 @@ class UserCreateCustomSerializer(serializers.ModelSerializer):
 
 
 class UserListSerializer(serializers.ModelSerializer):
-    date_joined = serializers.CharField(read_only=True)
-
     class Meta:
         model = User
         fields = ['user_id', 'username', 'date_joined']

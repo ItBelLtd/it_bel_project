@@ -43,6 +43,12 @@ class Comment(models.Model):
     def total_likes(self) -> int:
         return self.likes.count()
 
+    def get_date(self):
+        day = self.added.day
+        month = self.added.month
+        year = self.added.year
+        return f"{day} {month} {year}"
+
     def __str__(self) -> str:
         return self.text
 

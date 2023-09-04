@@ -50,6 +50,12 @@ class Author(models.Model):
         default=False
     )
 
+    def get_date(self):
+        day = self.date_joined.day
+        month = self.date_joined.month
+        year = self.date_joined.year
+        return f"{day} {month} {year}"
+
     class Meta:
         verbose_name = "Автор"
         verbose_name_plural = "Авторы"
