@@ -60,3 +60,6 @@ class Author(models.Model):
         verbose_name = "Автор"
         verbose_name_plural = "Авторы"
         ordering = ['-date_joined']
+
+    def __str__(self) -> str:
+        return f'{self.name} {self.surname}'

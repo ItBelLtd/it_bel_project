@@ -1,10 +1,11 @@
+import random
+
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from ..models.author import Author
 from ..models.user import User
 from users.serializers.author import AuthorSerializer
-import random
 
 
 class UserCreateCustomSerializer(serializers.ModelSerializer):
