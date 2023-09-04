@@ -58,7 +58,7 @@ class UserListSerializer(serializers.ModelSerializer):
         model = User
         fields = ['user_id', 'username', 'date_joined', 'as_author']
 
-    def get_as_author(self, user: User):
+    def get_as_author(self, user: User) -> AuthorSerializer:
         author = Author.objects.filter(user=user).first()
         if not author:
             return None
