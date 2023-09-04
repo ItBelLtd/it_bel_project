@@ -5,6 +5,7 @@ from rest_framework import serializers
 from ..models.like import Like
 from ..models.news import News
 from ..models.tag import Tag
+from users.models.user import User
 from users.serializers.author import AuthorSerializer
 
 
@@ -41,7 +42,7 @@ class NewsSerializer(serializers.ModelSerializer):
         ]
 
     def get_vote(self, obj: News) -> int:
-        user = self.context.get('request').user
+        user: User = self.context.get('request').user
         if not user.is_authenticated:
             return 0
 
