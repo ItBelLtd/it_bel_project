@@ -22,7 +22,7 @@ services:
       - ../.env
     volumes:
       - static_dir:/app/static/
-      - media_dir:/app/covers/
+      - media_dir:/app/media/
     depends_on:
       - db
       - redis
