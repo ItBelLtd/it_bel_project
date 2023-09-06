@@ -38,7 +38,11 @@ class NewsMixin:
         ).order_by(
             'likes_total'
         )[:6]
-        return Response(NewsSerializer(news, many=True).data)
+        return Response(
+            NewsSerializer(
+                news, many=True, context={'request': self.request}
+            ).data
+        )
 
     # @extend_schema(exclude=True) Waits for production
     @action(
