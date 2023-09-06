@@ -38,8 +38,8 @@ class Author(models.Model):
     )
     bio = models.TextField(
         verbose_name='Биография',
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
     date_joined = models.DateTimeField(
         verbose_name="Дата регистрации",
@@ -51,10 +51,7 @@ class Author(models.Model):
     )
 
     def get_date(self):
-        day = self.date_joined.day
-        month = self.date_joined.month
-        year = self.date_joined.year
-        return f"{day} {month} {year}"
+        return self.date_joined.strftime("%d.%m.%Y")
 
     class Meta:
         verbose_name = "Автор"

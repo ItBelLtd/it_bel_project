@@ -4,7 +4,7 @@ from ..models.author import Author
 
 
 class AuthorSerializer(serializers.ModelSerializer):
-    date_joined = serializers.SerializerMethodField()
+    date_joined = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Author

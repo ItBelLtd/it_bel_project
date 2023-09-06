@@ -77,10 +77,7 @@ class News(models.Model):
         return self.title
 
     def get_date(self):
-        day = self.added.day
-        month = self.added.month
-        year = self.added.year
-        return f"{day} {month} {year}"
+        return self.added.strftime("%d.%m.%Y")
 
     class Meta:
         verbose_name = "Новость"

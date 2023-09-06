@@ -11,6 +11,7 @@ from users.serializers.author import AuthorSerializer
 class UserCreateCustomSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(required=False)
     password = serializers.CharField(write_only=True)
+    date_joined = serializers.ReadOnlyField()
 
     class Meta:
         model = User
@@ -52,7 +53,6 @@ class UserCreateCustomSerializer(serializers.ModelSerializer):
 
 class UserListSerializer(serializers.ModelSerializer):
     as_author = serializers.SerializerMethodField(read_only=True)
-    date_joined = serializers.SerializerMethodField()
 
     class Meta:
         model = User

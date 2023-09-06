@@ -54,10 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f"{self.username} ({self.email})"
 
     def get_date(self):
-        day = self.date_joined.day
-        month = self.date_joined.month
-        year = self.date_joined.year
-        return f"{day} {month} {year}"
+        return self.date_joined.strftime("%d.%m.%Y")
 
     class Meta:
         verbose_name = "Пользователь"
