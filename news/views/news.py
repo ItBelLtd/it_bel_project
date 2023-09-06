@@ -30,5 +30,5 @@ class NewsViewSet(LikeMixin,
         kwargs['context'] = {'request': self.request}
         return super().get_serializer(
             *args,
-            **kwargs
+            **kwargs,
         )
