@@ -44,10 +44,7 @@ class Comment(models.Model):
         return self.likes.count()
 
     def get_date(self):
-        day = self.added.day
-        month = self.added.month
-        year = self.added.year
-        return f"{day} {month} {year}"
+        return self.added.strftime("%d.%m.%Y")
 
     def __str__(self) -> str:
         return self.text
