@@ -38,8 +38,8 @@ class Author(models.Model):
     )
     bio = models.TextField(
         verbose_name='Биография',
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
     date_joined = models.DateTimeField(
         verbose_name="Дата регистрации",
