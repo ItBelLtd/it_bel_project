@@ -9,7 +9,7 @@ from ..models.follow import Follow
 from ..models.user import User
 from ..permissions.user import UserOwnerOrReadOnly
 from ..serializers.author import AuthorSerializer
-from ..serializers.profile import ProfileSerializer
+from ..serializers.users import UserListSerializer
 
 
 class UserMixin:
@@ -21,13 +21,13 @@ class UserMixin:
         permission_classes=[UserOwnerOrReadOnly, IsAuthenticated, ],
     )
     def profile(self, request: Request):
-        serializer = ProfileSerializer(request.user)
+        serializer = UserListSerializer(request.user)
         return Response(serializer.data)
 
     @extend_schema(tags=['profile'])
     @profile.mapping.patch
     def profile_update(self, request: Request):
-        serializer = ProfileSerializer(request.user, data=request.data)
+        serializer = UserListSerializer(request.user, data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
@@ -35,8 +35,8 @@ class UserMixin:
     @extend_schema(tags=['profile'])
     @profile.mapping.delete
     def profile_delete(self, request: Request):
-        serializer = ProfileSerializer(request.user)
-        serializer.destroy()
+        user: User = request.user
+        user.delete()
         return Response({'detail': 'Success'}, status=204)
 
     @action(
