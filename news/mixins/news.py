@@ -8,7 +8,6 @@ from rest_framework.request import HttpRequest
 from rest_framework.response import Response
 
 from ..models.news import News
-from ..serializers.news import NewsSerializer
 from users.permissions.moderator import IsModerator
 
 
@@ -39,9 +38,7 @@ class NewsMixin:
             'likes_total'
         )[:6]
         return Response(
-            NewsSerializer(
-                news, many=True, context={'request': self.request}
-            ).data
+            self.get_serializer(news, many=True).data
         )
 
     # @extend_schema(exclude=True) Waits for production
@@ -53,8 +50,7 @@ class NewsMixin:
     )
     def moderate(self, request: HttpRequest):
         news = News.objects.filter(is_moderated=False)
-        serializer = NewsSerializer(news, many=True)
-        return Response(serializer.data)
+        return Response(self.get_serializer(news, many=True).data)
 
     # @extend_schema(exclude=True) Waits for production
     @action(
@@ -67,5 +63,4 @@ class NewsMixin:
         news = get_object_or_404(News, news_id=pk)
         news.is_moderated = True
         news.save()
-        serializer = NewsSerializer(news)
-        return Response(serializer.data)
+        return Response(self.get_serializer(news).data)

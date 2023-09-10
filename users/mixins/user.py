@@ -9,7 +9,6 @@ from ..models.follow import Follow
 from ..models.user import User
 from ..permissions.user import UserOwnerOrReadOnly
 from ..serializers.author import AuthorSerializer
-from ..serializers.users import UserListSerializer
 
 
 class UserMixin:
@@ -21,15 +20,15 @@ class UserMixin:
         permission_classes=[UserOwnerOrReadOnly, IsAuthenticated, ],
     )
     def profile(self, request: Request):
-        serializer = UserListSerializer(request.user)
-        return Response(serializer.data)
+        return Response(self.get_serializer(request.user).data)
 
     @extend_schema(tags=['profile'])
     @profile.mapping.patch
     def profile_update(self, request: Request):
-        serializer = UserListSerializer(request.user, data=request.data)
+        serializer = self.get_serializer(
+            instance=request.user, data=request.data)
         serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
+        serializer.update(request.user, validated_data=request.data)
         return Response(serializer.data)
 
     @extend_schema(tags=['profile'])
@@ -46,10 +45,11 @@ class UserMixin:
     )
     def user_following_list(self, request: Request, pk: int):
         # Can be refactored with related names
+        self.serializer_class = AuthorSerializer
         user = get_object_or_404(User, user_id=pk)
         following_authors = []
         for i in Follow.objects.filter(follower=user):
             following_authors.append(i.author)
-        serializer = AuthorSerializer(following_authors, many=True)
+        serializer = self.get_serializer(following_authors, many=True)
 
         return Response(serializer.data)

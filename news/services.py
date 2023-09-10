@@ -7,7 +7,7 @@ def add_remove_like(obj, user):
     """Добавить или удалить лайк у объекта"""
 
     obj_type = ContentType.objects.get_for_model(obj)
-    vote_val = get_remove_vote(obj=obj, obj_type=obj_type, user=user)
+    vote_val = get_remove_vote(obj=obj, user=user)
 
     if vote_val == Like.LIKE:
         return
@@ -25,7 +25,7 @@ def add_remove_dislike(obj, user):
     """Добавить или удалить дизлайк у объекта"""
 
     obj_type = ContentType.objects.get_for_model(obj)
-    vote_val = get_remove_vote(obj=obj, obj_type=obj_type, user=user)
+    vote_val = get_remove_vote(obj=obj, user=user)
 
     if vote_val == Like.DISLIKE:
         return
@@ -39,15 +39,11 @@ def add_remove_dislike(obj, user):
     return
 
 
-def get_remove_vote(obj, obj_type, user):
+def get_remove_vote(obj, user):
     """Удалить лайк или дизлайк с объекта
     и вернуть его значение"""
 
-    like = Like.objects.filter(
-        object_id=obj.pk,
-        content_type=obj_type,
-        user=user
-    ).first()
+    like = get_vote(obj, user)
 
     if not like:
         return None
@@ -55,3 +51,12 @@ def get_remove_vote(obj, obj_type, user):
     vote_value = like.vote
     like.delete()
     return vote_value  # noqa
+
+
+def get_vote(obj, user):
+    obj_type = obj_type = ContentType.objects.get_for_model(obj)
+    return Like.objects.filter(
+        object_id=obj.pk,
+        content_type=obj_type,
+        user=user
+    ).first()

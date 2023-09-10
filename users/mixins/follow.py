@@ -18,12 +18,13 @@ class FollowMixin:
         url_path='follow',
     )
     def follow(self, request: HttpRequest, pk: int):
+        self.serializer_class = FollowSerializer
         author = get_object_or_404(Author, author_id=pk)
         data = {
             'author': author.author_id,
             'follower': self.request.user.user_id,
         }
-        serializer = FollowSerializer(data=data)
+        serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({'detail': 'CREATED'}, status=201)
@@ -50,7 +51,8 @@ class FollowMixin:
         url_path='followers',
     )
     def author_follower_list(self, request: HttpRequest, pk: int):
+        self.serializer_class = UserListSerializer
         get_object_or_404(Author, author_id=pk)
         followers = [i.follower for i in Follow.objects.filter(author=pk)]
-        serializer = UserListSerializer(followers, many=True)
+        serializer = self.get_serializer(followers, many=True)
         return Response(serializer.data)

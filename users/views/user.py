@@ -15,7 +15,9 @@ class UserViewSet(
     UserMixin,
     EmailMixin
 ):
-    queryset = User.objects.all()
+    queryset = User.objects.select_related(
+        'author'
+    )
     permission_classes = [UserOwnerOrReadOnly, ]
     serializer_class = UserCreateCustomSerializer
 

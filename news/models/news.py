@@ -50,6 +50,7 @@ class News(models.Model):
     )
     tags = models.ManyToManyField(
         Tag,
+        related_name='news',
         verbose_name='Теги',
         blank=True
     )
