@@ -25,7 +25,6 @@ class NewsSerializer(serializers.ModelSerializer):
             'title',
             'author',
             'cover',
-            'description',
             'content',
             'tags',
             'added',
