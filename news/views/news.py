@@ -14,7 +14,11 @@ class NewsViewSet(LikeMixin,
                   NewsMixin,
                   viewsets.ModelViewSet):
 
-    queryset = News.objects.all()
+    queryset = News.objects.prefetch_related(
+        'votes', 'tags'
+    ).select_related(
+        'author'
+    )
     serializer_class = NewsSerializer
     permission_classes = [AuthorOrReadOnlyNews]
     filter_backends = [filters.SearchFilter]

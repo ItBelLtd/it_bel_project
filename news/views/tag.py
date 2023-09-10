@@ -10,7 +10,7 @@ class TagViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin
 ):
-    queryset = Tag.objects.all()
+    queryset = Tag.objects.prefetch_related('news')
     serializer_class = TagSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, )
     pagination_class = None

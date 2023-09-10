@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views.create import CustomTokenCreateView
-from .views.destroy import CustomTokenDestroyView
+from .views.token_create import CustomTokenCreateView
+from .views.token_destroy import CustomTokenDestroyView
 
 urlpatterns = [
     path('login/', CustomTokenCreateView.as_view(), name='token_create'),
