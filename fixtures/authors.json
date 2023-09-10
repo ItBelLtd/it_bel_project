@@ -7,6 +7,7 @@
       "name": "Test",
       "surname": "Testovich",
       "age": 35,
+      "bio": "string",
       "date_joined": "2023-08-05T14:43:31.705Z",
       "is_active": false
     }

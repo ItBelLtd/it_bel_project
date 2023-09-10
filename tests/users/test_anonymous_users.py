@@ -11,7 +11,6 @@ class UserTestCase(APITestCase):
     def setUp(self):
         self.user = User.objects.get(user_id=1)
         self.client = APIClient()
-        self.client.force_authenticate(user=self.user)
 
     def test_users_get(self):
         url = reverse("users-list")
@@ -44,7 +43,6 @@ class UserTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    # any changes to user must go through profile
     def test_users_put(self):
         url = reverse("users-detail", args=[self.user.pk])
 
@@ -56,9 +54,7 @@ class UserTestCase(APITestCase):
 
         response = self.client.put(url, put_data, format='json')
 
-        self.assertEqual(response.status_code,
-                         status.HTTP_405_METHOD_NOT_ALLOWED
-                         )
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_users_patch(self):
         url = reverse("users-detail", args=[self.user.pk])
@@ -69,16 +65,9 @@ class UserTestCase(APITestCase):
             "username": "test username"
         }
 
-        response = self.client.patch(
-            url,
-            patch_data,
-            format='json'
-        )
+        response = self.client.patch(url, patch_data, format='json')
 
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_405_METHOD_NOT_ALLOWED
-        )
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_users_delete(self):
         url = reverse("users-detail", args=[self.user.pk])
