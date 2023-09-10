@@ -1,10 +1,9 @@
-from django.contrib.contenttypes.models import ContentType
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 
-from ..models.like import Like
 from ..models.news import News
 from ..models.tag import Tag
+from ..services import get_vote
 from users.models.user import User
 from users.serializers.author import AuthorSerializer
 
@@ -45,12 +44,7 @@ class NewsSerializer(serializers.ModelSerializer):
         if not user.is_authenticated:
             return 0
 
-        obj_type = ContentType.objects.get_for_model(obj)
-        like = Like.objects.filter(
-            object_id=obj.pk,
-            content_type=obj_type,
-            user=user
-        ).first()
+        like = get_vote(obj, user)
         if not like:
             return 0
 

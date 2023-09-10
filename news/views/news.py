@@ -14,7 +14,11 @@ class NewsViewSet(LikeMixin,
                   NewsMixin,
                   viewsets.ModelViewSet):
 
-    queryset = News.objects.all()
+    queryset = News.objects.prefetch_related(
+        'votes', 'tags'
+    ).select_related(
+        'author'
+    )
     serializer_class = NewsSerializer
     permission_classes = [AuthorOrReadOnlyNews]
     filter_backends = [filters.SearchFilter]
@@ -25,10 +29,3 @@ class NewsViewSet(LikeMixin,
         if not hasattr(user, 'author'):
             raise ValidationError({'detail': 'Only authors can create News'})
         return serializer.save(author=user.author)
-
-    def get_serializer(self, *args, **kwargs) -> NewsSerializer:
-        kwargs['context'] = {'request': self.request}
-        return super().get_serializer(
-            *args,
-            **kwargs,
-        )

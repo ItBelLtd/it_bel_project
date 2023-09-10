@@ -13,7 +13,9 @@ class AuthorViewSet(mixins.RetrieveModelMixin,
                     viewsets.GenericViewSet,
                     AuthorMixin,
                     FollowMixin):
-    queryset = Author.objects.all()
+    queryset = Author.objects.prefetch_related(
+        'news', 'user'
+    )
     serializer_class = AuthorSerializer
     permission_classes = [AuthorOwnerOrReadOnly]
     filter_backends = [filters.SearchFilter]

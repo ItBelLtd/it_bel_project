@@ -16,9 +16,10 @@ class AuthorMixin:
         url_path='news',
     )
     def get_author_news(self, request: HttpRequest, pk: int):
+        self.serializer_class = NewsSerializer
         author = get_object_or_404(Author, author_id=pk)
         news = author.news.all()
-        serializer = NewsSerializer(news, many=True)
+        serializer = self.get_serializer(news, many=True)
         return Response(serializer.data)
 
     @action(
