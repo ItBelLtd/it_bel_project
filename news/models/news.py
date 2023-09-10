@@ -28,12 +28,6 @@ class News(models.Model):
         verbose_name="ID автора",
         related_name='news'
     )
-    description = models.TextField(
-        blank=True,
-        null=True,
-        max_length=60,
-        verbose_name="Описание новости"
-    )
     content = models.TextField(
         blank=False,
         null=False,
