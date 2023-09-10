@@ -16,7 +16,8 @@ class UserManager(_UserManager):
             email = self.normalize_email(email)
 
         user = self.model(
-            username=unicodedata.normalize("NFKC"),
+            username=unicodedata.normalize(
+                "NFKC", username or 'adminusername'),
             email=email,
             **extra_fields
         )
