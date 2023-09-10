@@ -25,10 +25,3 @@ class NewsViewSet(LikeMixin,
         if not hasattr(user, 'author'):
             raise ValidationError({'detail': 'Only authors can create News'})
         return serializer.save(author=user.author)
-
-    def get_serializer(self, *args, **kwargs) -> NewsSerializer:
-        kwargs['context'] = {'request': self.request}
-        return super().get_serializer(
-            *args,
-            **kwargs,
-        )
