@@ -54,7 +54,8 @@ class UserTestCase(APITestCase):
 
         response = self.client.put(url, put_data, format='json')
 
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(response.status_code,
+                         status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_users_patch(self):
         url = reverse("users-detail", args=[self.user.pk])
@@ -67,7 +68,8 @@ class UserTestCase(APITestCase):
 
         response = self.client.patch(url, patch_data, format='json')
 
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(response.status_code,
+                         status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_users_delete(self):
         url = reverse("users-detail", args=[self.user.pk])
