@@ -1,10 +1,9 @@
 from rest_framework import serializers
 
-from ..models.like import Like
 from ..models.comment import Comment
-from users.serializers.users import UserListSerializer
+from ..services import get_vote
 from users.models.user import User
-from django.contrib.contenttypes.models import ContentType
+from users.serializers.users import UserListSerializer
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -24,12 +23,7 @@ class CommentSerializer(serializers.ModelSerializer):
         if not user.is_authenticated:
             return 0
 
-        obj_type = ContentType.objects.get_for_model(obj)
-        like = Like.objects.filter(
-            object_id=obj.pk,
-            content_type=obj_type,
-            user=user
-        ).first()
+        like = get_vote(obj, user)
         if not like:
             return 0
 
