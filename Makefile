@@ -72,7 +72,7 @@ linter:
 
 
 # Runs all linter checks with pushing (secret)
-linterf:
+linterfull:
 	@echo "Running linter..."
 	isort .
 	flake8
