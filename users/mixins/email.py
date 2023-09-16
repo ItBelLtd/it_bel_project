@@ -59,7 +59,7 @@ class EmailMixin:
                 'Email not found',
                 status=status.HTTP_400_BAD_REQUEST
             )
-        user_email = validate_email(email=request.data.get('email', ''))
+        user_email = validate_email(request.data.get('email', ''))
         user = self.get_user_for_confirm(email=user_email)
 
         send_email_verification(
@@ -79,7 +79,7 @@ class EmailMixin:
         url_name='reset-password',
     )
     def reset_password(self, request: Request):
-        user_email = validate_email(email=request.data.get('email', ''))
+        user_email = validate_email(request.data.get('email', ''))
 
         user = self.get_user_for_confirm(email=user_email)
 
