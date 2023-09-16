@@ -92,7 +92,7 @@ dc:
 dc_clear:
 	@echo "Removing all docker-compose data..."
 	docker system prune
-	docker volume prune
+	docker volume rm infra_postgres_data
 
 
 # Pull changes

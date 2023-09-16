@@ -23,7 +23,6 @@ class SuperUserTestCase(APITestCase):
         post_data = {
             "title": "string",
             "cover": "",
-            "description": "string",
             "content": "string",
             "tags": [
             ]

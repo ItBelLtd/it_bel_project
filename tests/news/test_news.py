@@ -34,7 +34,6 @@ class NewsTestCase(APITestCase):
 
         post_data = {
             "title": "string",
-            "description": "string",
             "content": "string",
             "tags": [
                 1
@@ -50,7 +49,6 @@ class NewsTestCase(APITestCase):
 
         put_data = {
             "title": "string",
-            "description": "string",
             "content": "string",
             "tags": [
                 1
@@ -66,7 +64,6 @@ class NewsTestCase(APITestCase):
 
         patch_data = {
             "title": "string",
-            "description": "string",
             "content": "string"
         }
 
