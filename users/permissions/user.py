@@ -10,4 +10,8 @@ class UserOwnerOrReadOnly(permissions.BasePermission):
             return True
         if not request.user.is_authenticated:
             return False
-        return obj.user_id == request.user.user_id or request.user.is_superuser
+        if obj.user_id == request.user.user_id:
+            return True
+        if request.user.is_superuser:
+            return True
+        return False

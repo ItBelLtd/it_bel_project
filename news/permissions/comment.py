@@ -7,17 +7,21 @@ from news.models.news import News
 
 class AuthorOrReadOnlyComments(permissions.BasePermission):
     def has_permission(self, request: HttpRequest, view):
-        return (
-            request.method in permissions.SAFE_METHODS
-            or request.user.is_authenticated
-            or request.user.is_superuser
-        )
+        if request.user.is_authenticated:
+            return True
+        if request.user.is_superuser:
+            return True
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return False
 
     def has_object_permission(
             self, request: HttpRequest, view, obj: Comment | News
     ):
-        return (
-            obj.author == request.user
-            or request.method in permissions.SAFE_METHODS
-            or request.user.is_superuser
-        )
+        if obj.author == request.user:
+            return True
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        if request.user.is_superuser:
+            return True
+        return False

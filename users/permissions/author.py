@@ -6,15 +6,19 @@ from users.models.author import Author
 
 class AuthorOwnerOrReadOnly(permissions.BasePermission):
     def has_permission(self, request: HttpRequest, view):
-        return (
-            request.method in permissions.SAFE_METHODS
-            or request.user.is_authenticated
-            or request.user.is_superuser
-        )
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        if request.user.is_authenticated:
+            return True
+        if request.user.is_superuser:
+            return True
+        return False
 
     def has_object_permission(self, request: HttpRequest, view, obj: Author):
-        return (
-            request.method in permissions.SAFE_METHODS
-            or obj == request.user.author
-            or request.user.is_superuser
-        )
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        if obj == request.user.author:
+            return True
+        if request.user.is_superuser:
+            return True
+        return False
