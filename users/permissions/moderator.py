@@ -7,7 +7,15 @@ class IsModerator(permissions.BasePermission):
     def has_permission(self, request, view):
         if not request.user.is_authenticated:
             return False
-        return request.user.is_moderator or request.user.is_superuser
+        if request.user.is_moderator:
+            return True
+        if request.user.is_superuser:
+            return True
+        return False
 
     def has_object_permission(self, request: HttpRequest, view, obj):
-        return request.user.is_moderator or request.user.is_superuser
+        if request.user.is_moderator:
+            return True
+        if request.user.is_superuser:
+            return True
+        return False
