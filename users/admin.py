@@ -4,13 +4,11 @@ from .models.author import Author
 from .models.user import User
 
 
+@admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     pass
-
-
-admin.site.register(Author, AuthorAdmin)
-admin.site.register(User, UserAdmin)
