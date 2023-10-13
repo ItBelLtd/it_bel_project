@@ -38,6 +38,12 @@ class FollowTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_author_follower_list(self):
+        url = reverse("authors-author-follower-list", args=[self.author.pk])
+        response = self.client_for_author.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_unfollow_post(self):
         url = reverse("authors-detail", args=[self.author.pk]) + 'unfollow/'
         post_data = {}

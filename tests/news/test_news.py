@@ -108,9 +108,9 @@ class NewsTestCase(APITestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_news_delete(self):
         url = reverse("news-detail", args=[self.news.pk])
         response = self.client.delete(url)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-

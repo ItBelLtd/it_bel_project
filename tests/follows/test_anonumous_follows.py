@@ -42,3 +42,9 @@ class FollowTestCase(APITestCase):
         response = self.client_for_author.post(url, post_data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_author_follower_list(self):
+        url = reverse("authors-author-follower-list", args=[self.author.pk])
+        response = self.client_for_author.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

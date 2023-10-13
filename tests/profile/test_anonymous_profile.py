@@ -36,3 +36,8 @@ class ProfileTestCase(APITestCase):
         response = self.client.delete(url)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_user_following_list(self):
+        url = reverse("users-user-following-list", args=[self.user.pk])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
