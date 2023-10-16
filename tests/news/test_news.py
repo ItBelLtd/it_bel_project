@@ -73,28 +73,14 @@ class NewsTestCase(APITestCase):
 
     def test_dislike_news(self):
         url = reverse("news-dislike", args=[self.news.pk])
-        post_data = {
-            "title": "string",
-            "cover": "string",
-            "content": "string",
-            "tags": [
-            ]
-        }
 
-        response = self.client.post(url, post_data, format='json')
+        response = self.client.post(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_like_news(self):
         url = reverse("news-like", args=[self.news.pk])
-        post_data = {
-            "title": "string",
-            "cover": "string",
-            "content": "string",
-            "tags": [
-            ]
-        }
 
-        response = self.client.post(url, post_data, format='json')
+        response = self.client.post(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_popular_news(self):
