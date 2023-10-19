@@ -20,6 +20,11 @@ class ProfileTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_user_following_list(self):
+        url = reverse("users-user-following-list", args=[self.user.pk])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_profile_patch(self):
         url = reverse("users-list") + 'profile/'
 

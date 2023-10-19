@@ -71,6 +71,30 @@ class NewsTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_dislike_news(self):
+        url = reverse("news-dislike", args=[self.news.pk])
+
+        response = self.client.post(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_like_news(self):
+        url = reverse("news-like", args=[self.news.pk])
+
+        response = self.client.post(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_popular_news(self):
+        url = reverse("news-get-popular-news")
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def moderate_news(self):
+        url = reverse("news-moderate")
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_news_delete(self):
         url = reverse("news-detail", args=[self.news.pk])
         response = self.client.delete(url)

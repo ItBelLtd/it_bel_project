@@ -1,6 +1,8 @@
 from random import randint
+from string import ascii_letters
 
 from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from rest_framework import serializers
 
 from ..models.author import Author
@@ -23,6 +25,15 @@ class UserCreateCustomSerializer(serializers.ModelSerializer):
     def validate_password(self, password):
         validate_password(password)
         return password
+
+    def validate_username(self, username):
+        valid_characters = ascii_letters + "1234567890-=*/{}[].,<>&^%$#@!*()_~"
+        if all(map(
+                lambda c: c in valid_characters,
+                username
+        )):
+            return username
+        return ValidationError("username cannot contain non-Latin characters")
 
     def create(self, validated_data: dict):
         if 'username' not in validated_data:
