@@ -19,7 +19,6 @@ class AuthorSerializer(serializers.ModelSerializer):
             'date_joined',
             'bio',
             'username',
-            'news',
         ]
 
     def get_date_joined(self, obj: Author) -> str:
